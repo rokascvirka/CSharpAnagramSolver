@@ -11,6 +11,7 @@ namespace BuisnessLogic
         public void AnagramGeneratorMethod(ITxtReader TxtFilerReader, IMainWordPicker MainWordPicker, IWordSorter wordSorter, Dictionary<string, List<string>> wordsInDictionary)
         {
             // From list to dictionary 
+            //test
             var anagramWord = MainWordPicker.MainWord(); //palikti
             Console.WriteLine("anagramWord = {0}", anagramWord);
 
