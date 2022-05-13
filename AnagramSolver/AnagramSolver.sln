@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuisnessLogic", "..\Buisnes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "..\Contracts\Contracts.csproj", "{F1D04D22-C296-4D8E-AD0B-B3963E80C80C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagrameGeneratorUnitTests", "..\AnagrameGeneratorUnitTests\AnagrameGeneratorUnitTests.csproj", "{91E83D6A-4F0F-459F-BADB-91D55A3AB055}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicUnitTests", "..\AnagrameGeneratorUnitTests\BusinessLogicUnitTests.csproj", "{91E83D6A-4F0F-459F-BADB-91D55A3AB055}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,6 +7,7 @@ namespace AnagrameGeneratorUnitTests
     {
         [TestCase("", "String can't be null or empty")]
         [TestCase("Alus", "valid")]
+        [TestCase("al  us", "valid")]
         [TestCase("123", "Every charracter supposed to be from a to z. You can't use any symbols or numbers.")]
         [TestCase("a!us", "Every charracter supposed to be from a to z. You can't use any symbols or numbers.")]
         public void When_BadInput_Expect_AnError(string word, string actual)

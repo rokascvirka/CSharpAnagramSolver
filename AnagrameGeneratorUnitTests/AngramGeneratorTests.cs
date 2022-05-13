@@ -9,7 +9,6 @@ namespace AnagrameGeneratorUnitTests
         [Test]
         public void When_KnownInput_Expect_NoErrors()
         {
-
             // ARANGE
             var answer = 1;
             var answerTwo = 2;
@@ -21,14 +20,24 @@ namespace AnagrameGeneratorUnitTests
             AnagramGenerator generator = new AnagramGenerator();
             string result = generator.ShowAnagram(answer, anagramWord, randomValueInList);
             string resultTwo = generator.ShowAnagram(answerTwo, anagramWord, randomValueInList);
-            string resultZero = generator.ShowAnagram(answerZero, anagramWord, randomValueInList);
+            string resultZero = generator.ShowAnagram(answerZero, anagramWord, "");
 
             // ASSERT
             Assert.AreEqual(result, "This word: alus anagram: sula");
             Assert.AreEqual(resultTwo, "This word: alus doesn't have anagram in our dictionary");
             Assert.AreEqual(resultZero, "This word: alus doesn't have anagram in our dictionary");
-
         }
+
+        [TestCase(1, "alus", "sula", "This word: alus anagram: sula")]
+        [TestCase(0, "alus", "", "This word: alus doesn't have anagram in our dictionary")]
+        public void When_EnteredResultIsGood_Expect_KnownOutPut(int answer, string anagramWord, string randomValueInList, string expected)
+        {
+            AnagramGenerator generator = new AnagramGenerator();
+            string actual = generator.ShowAnagram(answer, anagramWord, randomValueInList);
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [Test]
         public void When_KnowInput_Expect_RightValidationNumberReturned()
         {
@@ -36,16 +45,18 @@ namespace AnagrameGeneratorUnitTests
             var randomValueInList = "sula";
             var anagramWord = "alus";
             var sortedMainWordForAnagram = "alsu";
-            var valuesList = new List<string>();
-            var moreThanOneValueList = new List<string>();
-            var wordsInDictionary = new Dictionary<string, List<string>>();
-            var secondWordsInDictionary = new Dictionary<string, List<string>>();
+            var valuesList = new List<string>() { "sula" };
+            var moreThanOneValueList = new List<string>() { "sula", "alus"};
 
-            valuesList.Add("sula");
-            moreThanOneValueList.Add("sula");
-            moreThanOneValueList.Add("alsu");
-            wordsInDictionary.Add("alsu", valuesList);
-            secondWordsInDictionary.Add("alsu", moreThanOneValueList);
+            var wordsInDictionary = new Dictionary<string, List<string>>() 
+                {
+                    { "alsu", valuesList }
+                };
+
+            var secondWordsInDictionary = new Dictionary<string, List<string>>()
+                {
+                    { "alsu", moreThanOneValueList }
+                };
 
 
             // Act
