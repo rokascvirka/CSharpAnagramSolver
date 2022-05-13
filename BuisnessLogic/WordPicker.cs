@@ -10,20 +10,35 @@ namespace BuisnessLogic
         {
             Console.WriteLine("Enter a word and get anagram: ");
 
-            var mainWordForAnagram = Console.ReadLine().Trim().ToLower();
-            if (InputVerifyer(mainWordForAnagram) == "valid") 
+            var mainWordForAnagram = Console.ReadLine().ToLower();
+            var inputWord = RemoveSpaces(mainWordForAnagram);
+
+            if (InputVerifyer(inputWord) == "valid") 
             {
-                return mainWordForAnagram;
+                return inputWord;
             }
             else
             {
-                var error = InputVerifyer(mainWordForAnagram);
+                var error = InputVerifyer(inputWord);
                 Console.WriteLine(error);
                 Console.WriteLine("Try again noob...");
-                MainWord();
+                return MainWord();
             }
+        }
 
-            return mainWordForAnagram;
+        public string RemoveSpaces(string mainWordForAnagram)
+        {
+            var inputWord = mainWordForAnagram.ToCharArray();
+            var correctInput = "";
+
+            foreach (char letter in inputWord)
+            {
+                if (!Char.IsWhiteSpace(letter))
+                {
+                    correctInput += letter;
+                }
+            }
+            return correctInput;
         }
 
         public string InputVerifyer(string mainWordForAnagram)
@@ -31,10 +46,9 @@ namespace BuisnessLogic
             if (string.IsNullOrEmpty(mainWordForAnagram) == true)
             {
                 return "String can't be null or empty";
-            } 
-            var inputWord = mainWordForAnagram.Trim().ToLower();
-            // Naujas metodas remove spaces
-            foreach (char letter in inputWord)
+            }
+
+            foreach (char letter in mainWordForAnagram)
             {
                 if (!Char.IsLetter(letter))
                 {
@@ -45,3 +59,4 @@ namespace BuisnessLogic
         }
     }
 }
+  

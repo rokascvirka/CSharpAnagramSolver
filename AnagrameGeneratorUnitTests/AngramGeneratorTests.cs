@@ -7,7 +7,7 @@ namespace AnagrameGeneratorUnitTests
     public class Tests
     {
         [Test]
-        public void When_GoodInput_Expect_AnNoErrors()
+        public void When_KnownInput_Expect_NoErrors()
         {
 
             // ARANGE
@@ -30,7 +30,7 @@ namespace AnagrameGeneratorUnitTests
 
         }
         [Test]
-        public void Whatever()
+        public void When_KnowInput_Expect_RightValidationNumberReturned()
         {
             //Arange
             var randomValueInList = "sula";
@@ -68,43 +68,4 @@ namespace AnagrameGeneratorUnitTests
     }
 }
 
- // Unit tests
-            //if (VerifyInput(null) == "valid")
-            //{
-            //    Console.WriteLine("Input can't be null");
-            //}
-
-            //if (VerifyInput("") == "valid")
-            //{
-            //    Console.WriteLine("Input can't be empty");
-            //}
-
-            //if (VerifyInput("Labas") != "valid")
-            //{
-            //    Console.WriteLine("Does't work ToLower()");
-            //}
-
-            //if (VerifyInput("      Labas") != "valid")
-            //{
-            //    Console.WriteLine("Does't work Trim() from beggining");
-            //}
-
-            //if (VerifyInput("      Labas  ") != "valid")
-            //{
-            //    Console.WriteLine("Does't work Trim() from end");
-            //}
-            //if (VerifyInput("123") == "valid")
-            //{
-            //    Console.WriteLine("Does't work IsLetter() - numbers case");
-            //}
-            //if (VerifyInput("!labas") == "valid")
-            //{
-            //    Console.WriteLine("Does't work IsLetter() - symbols case");
-            //}
-            //if (VerifyInput("la bas") == "not valid")
-            //{
-            //    Console.WriteLine("Space in the middle is not solved");
-            //}
-
-            //Console.WriteLine("All tests passed");
         
