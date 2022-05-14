@@ -7,6 +7,6 @@ namespace Contracts
     public interface IAnagramGenerator
 
     {
-        void AnagramGeneratorMethod(ITxtReader TxtFilerReader, IMainWordPicker MainWordPicker, IWordSorter wordSorter, Dictionary<string, List<string>> wordsInDictionary);
+        public string AnagramGeneratorMethod(string inputWord, IWordSorter wordSorter, Dictionary<string, List<string>> wordsInDictionary);
     }
 }

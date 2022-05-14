@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using BuisnessLogic;
+using Shouldly;
 
 namespace AnagrameGeneratorUnitTests
 {
@@ -17,12 +18,13 @@ namespace AnagrameGeneratorUnitTests
 
             word = picker.RemoveSpaces(word);
 
-            string expected = picker.InputVerifyer(word);
+            string result = picker.InputVerifyer(word);
 
             //Assert
-            Assert.AreEqual(expected, actual);
+            result.ShouldBe(actual);
         }
 
+        //Old Assert.Equal example
         [TestCase("  al us ", "alus")]
         [TestCase(" alus", "alus")]
         [TestCase(" alus ", "alus")]
@@ -33,9 +35,26 @@ namespace AnagrameGeneratorUnitTests
         {
             WordPicker remover = new WordPicker();
 
-            string expected = remover.RemoveSpaces(word);
+            var result = remover.RemoveSpaces(word);
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(result, actual);
+        }
+
+        //Shouldly example
+        [TestCase("  al us ", "alus")]
+        [TestCase(" alus", "alus")]
+        [TestCase(" alus ", "alus")]
+        [TestCase("alus  ", "alus")]
+        [TestCase("al us", "alus")]
+        public void When_InputWhithSpaces_Expect_AnswerWithoutUsingShouldly(string word, string actual)
+        {
+            WordPicker remover = new WordPicker();
+
+            var result = remover.RemoveSpaces(word);
+
+            result.ShouldBe(actual);
+
+            Assert.AreEqual(result, actual);
         }
 
     }

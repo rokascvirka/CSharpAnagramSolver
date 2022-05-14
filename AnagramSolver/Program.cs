@@ -11,11 +11,11 @@ namespace AnagramSolver
     {
         static void Main(string[] args)
         {
-            IMainWordPicker MainWordPicker = new WordPicker();
+            IMainWordPicker mainWordPicker = new WordPicker();
 
-            IWordSorter WordSorter = new WordSorter();
+            IWordSorter wordSorter = new WordSorter();
 
-            IDictGenerator DictionaryGenerator = new DictionaryGenerator();
+            IDictGenerator dictionaryGenerator = new DictionaryGenerator();
 
             IAnagramGenerator anagramGenerator = new AnagramGenerator();
 
@@ -23,76 +23,43 @@ namespace AnagramSolver
             List<string> txtFile = System.IO.File.ReadLines(@"C:\Users\rokas.cvirka\Documents\zodynas1.txt").ToList();
             var words = TxtFilerReader.TxtFileReader(txtFile);
 
-            var wordsInDictionary = DictionaryGenerator.DictGenerator(words);
+            var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
 
-            anagramGenerator.AnagramGeneratorMethod(TxtFilerReader, MainWordPicker, WordSorter, wordsInDictionary);
+            while (true)
+            {
 
-            
+                var inputWord = MainWord();
 
-            // Unit tests
-            //if (VerifyInput(null) == "valid")
-            //{
-            //    Console.WriteLine("Input can't be null");
-            //}
+                if (inputWord == "quit")
+                {
+                    break;
+                }
 
-            //if (VerifyInput("") == "valid")
-            //{
-            //    Console.WriteLine("Input can't be empty");
-            //}
-
-            //if (VerifyInput("Labas") != "valid")
-            //{
-            //    Console.WriteLine("Does't work ToLower()");
-            //}
-
-            //if (VerifyInput("      Labas") != "valid")
-            //{
-            //    Console.WriteLine("Does't work Trim() from beggining");
-            //}
-
-            //if (VerifyInput("      Labas  ") != "valid")
-            //{
-            //    Console.WriteLine("Does't work Trim() from end");
-            //}
-            //if (VerifyInput("123") == "valid")
-            //{
-            //    Console.WriteLine("Does't work IsLetter() - numbers case");
-            //}
-            //if (VerifyInput("!labas") == "valid")
-            //{
-            //    Console.WriteLine("Does't work IsLetter() - symbols case");
-            //}
-            //if (VerifyInput("la bas") == "not valid")
-            //{
-            //    Console.WriteLine("Space in the middle is not solved");
-            //}
-
-            //Console.WriteLine("All tests passed");
+                Console.WriteLine(anagramGenerator.AnagramGeneratorMethod(inputWord, wordSorter, wordsInDictionary));
+            }
         }
+        public static string MainWord()
+        {
+            IMainWordPicker mainWordPicker = new WordPicker();
 
-        //private static string VerifyInput(string word)
-        //{
-        //    if (string.IsNullOrEmpty(word) == true)
-        //    {
-        //        return "Input can't be null or empty";
-        //    }
+            Console.WriteLine("Enter a word and get anagram, if you want to quit write 'quit': ");
 
-        //    var inputWord = word.Trim().ToLower();
+            var mainWordForAnagram = Console.ReadLine().ToLower();
+            var inputWord = mainWordPicker.RemoveSpaces(mainWordForAnagram);
 
-        //    foreach (char letter in inputWord)
-        //    {
-        //        if (!Char.IsLetter(letter))
-        //        {
-        //            return "not valid";
-        //        }
-        //    }
-        //    return "valid";
-        //}
-
-        //private static 
-
-
-
+            if (mainWordPicker.InputVerifyer(inputWord) == "valid")
+            {
+                return inputWord;
+            }
+        
+            else
+            {
+                var error = mainWordPicker.InputVerifyer(inputWord);
+                Console.WriteLine(error);
+                Console.WriteLine("Try again noob...");
+            }
+            return MainWord();
+        }
     }
 }
 

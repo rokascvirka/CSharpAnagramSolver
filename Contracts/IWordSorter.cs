@@ -6,6 +6,6 @@ namespace Contracts
 {
     public interface IWordSorter
     {
-        string SortRandomWord(string mainWordForAnagram);
+        string SortRandomWord(string inputWord);
     }
 }

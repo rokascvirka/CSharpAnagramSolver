@@ -8,19 +8,16 @@ namespace BuisnessLogic
 {
     public class AnagramGenerator : IAnagramGenerator
     {
-        public void AnagramGeneratorMethod(ITxtReader TxtFilerReader, IMainWordPicker MainWordPicker, IWordSorter wordSorter, Dictionary<string, List<string>> wordsInDictionary)
+        public string AnagramGeneratorMethod(string inputWord, IWordSorter wordSorter, Dictionary<string, List<string>> wordsInDictionary)
         {
             // From list to dictionary 
-            var anagramWord = MainWordPicker.MainWord(); //palikti
-            Console.WriteLine("anagramWord = {0}", anagramWord);
+            var anagramWord = inputWord; 
 
-            var sortedMainWordForAnagram = wordSorter.SortRandomWord(anagramWord); // palikti
-            Console.WriteLine("sortedMainWordForAnagram = {0}", sortedMainWordForAnagram);
-
-
+            var sortedMainWordForAnagram = wordSorter.SortRandomWord(anagramWord); 
             if (!wordsInDictionary.ContainsKey(sortedMainWordForAnagram))
             {
-                Console.WriteLine("There is no word like this in dict and it doesn't have any anagrams");
+                var result = String.Format("There is no word like this in dict and it doesn't have any anagrams"); 
+                return result;
             }
             else
             {
@@ -35,14 +32,17 @@ namespace BuisnessLogic
                         if (anagramWord != newRandom)
                         {
                             randomValueInList = newRandom;
-                            Console.WriteLine("This word: {0} anagram: {1} (After a while loop)", anagramWord, newRandom);
+                            var result =  String.Format("This word: {0} anagram: {1} (After a while loop)", anagramWord, randomValueInList);
+                            return result;
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine(ShowAnagram(validation, anagramWord, randomValueInList));
+                    var result = String.Format(ShowAnagram(validation, anagramWord, randomValueInList));
+                    return result;
                 }
+                return String.Format("Something");
             }
         }
 
@@ -82,9 +82,7 @@ namespace BuisnessLogic
             }
         }
 
-        //  Reikia testo Validate Angram
-
-        public string ShowAnagram(int answer, string anagramWord, string randomValueInList) //testuoti
+        public string ShowAnagram(int answer, string anagramWord, string randomValueInList) 
         {
             if (answer == 1)
             {

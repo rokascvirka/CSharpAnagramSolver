@@ -6,26 +6,6 @@ namespace BuisnessLogic
 {
     public class WordPicker : IMainWordPicker
     {
-        public string MainWord()
-        {
-            Console.WriteLine("Enter a word and get anagram: ");
-
-            var mainWordForAnagram = Console.ReadLine().ToLower();
-            var inputWord = RemoveSpaces(mainWordForAnagram);
-
-            if (InputVerifyer(inputWord) == "valid") 
-            {
-                return inputWord;
-            }
-            else
-            {
-                var error = InputVerifyer(inputWord);
-                Console.WriteLine(error);
-                Console.WriteLine("Try again noob...");
-                return MainWord();
-            }
-        }
-
         public string RemoveSpaces(string mainWordForAnagram)
         {
             var inputWord = mainWordForAnagram.ToCharArray();
@@ -41,7 +21,7 @@ namespace BuisnessLogic
             return correctInput;
         }
 
-        public string InputVerifyer(string mainWordForAnagram)
+        public object InputVerifyer(string mainWordForAnagram)
         {
             if (string.IsNullOrEmpty(mainWordForAnagram) == true)
             {

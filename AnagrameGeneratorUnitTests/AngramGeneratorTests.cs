@@ -1,11 +1,14 @@
 using NUnit.Framework;
 using BuisnessLogic;
 using System.Collections.Generic;
+using Shouldly;
 
 namespace AnagrameGeneratorUnitTests
 {
     public class Tests
     {
+
+        //First try to test ShowAnagram
         [Test]
         public void When_KnownInput_Expect_NoErrors()
         {
@@ -28,14 +31,27 @@ namespace AnagrameGeneratorUnitTests
             Assert.AreEqual(resultZero, "This word: alus doesn't have anagram in our dictionary");
         }
 
+        //Second try to test ShowAnagram with TestCase
         [TestCase(1, "alus", "sula", "This word: alus anagram: sula")]
         [TestCase(0, "alus", "", "This word: alus doesn't have anagram in our dictionary")]
-        public void When_EnteredResultIsGood_Expect_KnownOutPut(int answer, string anagramWord, string randomValueInList, string expected)
+        public void When_EnteredResultIsGood_Expect_KnownOutPut(int answer, string anagramWord, string randomValueInList, string actual)
         {
             AnagramGenerator generator = new AnagramGenerator();
-            string actual = generator.ShowAnagram(answer, anagramWord, randomValueInList);
+            string expected = generator.ShowAnagram(answer, anagramWord, randomValueInList);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        //Third try to test ShowAnagram with Shouldly
+        [TestCase(1, "alus", "sula", "This word: alus anagram: sula")]
+        [TestCase(0, "alus", "", "This word: alus doesn't have anagram in our dictionary")]
+        public void When_EnteredResultIsGood_Expect_KnownOutPutShouldly(int answer, string anagramWord, string randomValueInList, string actual)
+        {
+            AnagramGenerator generator = new AnagramGenerator();
+            string result = generator.ShowAnagram(answer, anagramWord, randomValueInList);
+
+            result.ShouldBe(actual);
+            
         }
 
         [Test]
