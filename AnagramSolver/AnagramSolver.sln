@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "..\Contracts\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicUnitTests", "..\AnagrameGeneratorUnitTests\BusinessLogicUnitTests.csproj", "{91E83D6A-4F0F-459F-BADB-91D55A3AB055}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagramWebsite", "..\AnagramWebsite\AnagramWebsite.csproj", "{75EFBF1F-F1EF-4E1B-B09C-70A11161DB9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{91E83D6A-4F0F-459F-BADB-91D55A3AB055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91E83D6A-4F0F-459F-BADB-91D55A3AB055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91E83D6A-4F0F-459F-BADB-91D55A3AB055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75EFBF1F-F1EF-4E1B-B09C-70A11161DB9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75EFBF1F-F1EF-4E1B-B09C-70A11161DB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75EFBF1F-F1EF-4E1B-B09C-70A11161DB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75EFBF1F-F1EF-4E1B-B09C-70A11161DB9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

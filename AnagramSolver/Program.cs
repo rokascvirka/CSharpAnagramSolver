@@ -20,7 +20,7 @@ namespace AnagramSolver
             IAnagramGenerator anagramGenerator = new AnagramGenerator();
 
             ITxtReader TxtFilerReader = new TxtReader();
-            List<string> txtFile = System.IO.File.ReadLines(@"C:\Users\rokas.cvirka\Documents\zodynas1.txt").ToList();
+            List<string> txtFile = System.IO.File.ReadLines(@"C:\Users\rokas.cvirka\Documents\zodynas.txt").ToList();
             var words = TxtFilerReader.TxtFileReader(txtFile);
 
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
