@@ -10,8 +10,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "..\Contracts\Contracts.csproj", "{F1D04D22-C296-4D8E-AD0B-B3963E80C80C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicUnitTests", "..\AnagrameGeneratorUnitTests\BusinessLogicUnitTests.csproj", "{91E83D6A-4F0F-459F-BADB-91D55A3AB055}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EF3B9A1C-F70A-42F6-B8B1-6E34B79C79AA} = {EF3B9A1C-F70A-42F6-B8B1-6E34B79C79AA}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnagramWebsite", "..\AnagramWebsite\AnagramWebsite.csproj", "{75EFBF1F-F1EF-4E1B-B09C-70A11161DB9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnagramSolverWebsite", "..\AnagramWebsite\AnagramSolverWebsite.csproj", "{75EFBF1F-F1EF-4E1B-B09C-70A11161DB9E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EF3B9A1C-F70A-42F6-B8B1-6E34B79C79AA} = {EF3B9A1C-F70A-42F6-B8B1-6E34B79C79AA}
+		{F1D04D22-C296-4D8E-AD0B-B3963E80C80C} = {F1D04D22-C296-4D8E-AD0B-B3963E80C80C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

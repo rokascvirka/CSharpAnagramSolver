@@ -6,7 +6,6 @@ namespace Contracts
 {
     public interface IMainWordPicker
     {
-        string RemoveSpaces(string mainWordForAnagram);
-        object InputVerifyer(string inputWord);
+        string InputVerifyer(string inputWord);
     }
 }

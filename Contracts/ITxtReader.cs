@@ -6,6 +6,6 @@ namespace Contracts
 {
     public interface ITxtReader
     {
-        List<string> TxtFileReader(List<string> TxtFile);
+        List<string> TxtFileReader(string txtFilePath);
     }
 }

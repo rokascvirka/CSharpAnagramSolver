@@ -4,24 +4,10 @@ using System.Collections.Generic;
 
 namespace BuisnessLogic
 {
-    public class WordPicker : IMainWordPicker
+    public class WordPicker : IMainWordPicker //ne wordpickeris
     {
-        public string RemoveSpaces(string mainWordForAnagram)
-        {
-            var inputWord = mainWordForAnagram.ToCharArray();
-            var correctInput = "";
 
-            foreach (char letter in inputWord)
-            {
-                if (!Char.IsWhiteSpace(letter))
-                {
-                    correctInput += letter;
-                }
-            }
-            return correctInput;
-        }
-
-        public object InputVerifyer(string mainWordForAnagram)
+        public string InputVerifyer(string mainWordForAnagram)
         {
             if (string.IsNullOrEmpty(mainWordForAnagram) == true)
             {
