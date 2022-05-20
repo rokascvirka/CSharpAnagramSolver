@@ -47,8 +47,6 @@ namespace AnagrameGeneratorUnitTests
         [TestCase("al us", "alus")]
         public void When_InputWhithSpaces_Expect_AnswerWithoutUsingShouldly(string word, string actual)
         {
-            WordPicker remover = new WordPicker();
-
             var result = word.RemoveSpaces();
 
             result.ShouldBe(actual);

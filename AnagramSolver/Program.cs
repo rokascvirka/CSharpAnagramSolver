@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Contracts;
 using System.Linq;
-
+using System.IO;
 
 namespace AnagramSolver
 {
@@ -19,12 +19,14 @@ namespace AnagramSolver
 
             ITxtReader TxtFilerReader = new TxtReader();
 
-            Console.WriteLine("Enter the dictionary file path: ");
-            var textFilePath = Console.ReadLine();
+            var textFileNameInput = ChooseWordsDictionaryFile();
 
-         // @"C:\Users\rokas.cvirka\Documents\zodynas1.txt"
+            if (textFileNameInput == "quit")
+            {
+                Environment.Exit(0);
+            }
 
-         var words = TxtFilerReader.TxtFileReader(textFilePath);
+            var words = TxtFilerReader.TxtFileReader(textFileNameInput);
 
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
 
@@ -60,6 +62,27 @@ namespace AnagramSolver
                 Console.WriteLine("Try again noob...");
             }
             return MainWord();
+        }
+
+        public static string ChooseWordsDictionaryFile()
+        {
+            while (true)
+            {
+                Console.WriteLine("Enter the dictionary file name: ");
+                var textFileNameInput = Console.ReadLine().RemoveSpaces();
+                var textFilePath = ("C:\\Users\\rokas.cvirka\\Documents\\" + textFileNameInput + ".txt");
+
+                if (File.Exists(textFilePath))
+                {
+                    return textFilePath;
+                }
+                if (textFileNameInput == "quit")
+                {
+                    return textFileNameInput;
+                }
+
+                Console.WriteLine("There is no file named: '{0}'. Try again or write 'quit' to exit...", textFileNameInput);
+            }
         }
     }
 }
