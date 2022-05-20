@@ -16,7 +16,7 @@ namespace AnagrameGeneratorUnitTests
             //Act
             WordPicker picker = new WordPicker();
 
-            word = picker.RemoveSpaces(word);
+            word = word.RemoveSpaces();
 
             string result = picker.InputVerifyer(word);
 
@@ -33,9 +33,8 @@ namespace AnagrameGeneratorUnitTests
 
         public void When_InputWhithSpaces_Expect_AnswerWithout(string word, string actual)
         {
-            WordPicker remover = new WordPicker();
 
-            var result = remover.RemoveSpaces(word);
+            var result = word.RemoveSpaces();
 
             Assert.AreEqual(result, actual);
         }
@@ -50,7 +49,7 @@ namespace AnagrameGeneratorUnitTests
         {
             WordPicker remover = new WordPicker();
 
-            var result = remover.RemoveSpaces(word);
+            var result = word.RemoveSpaces();
 
             result.ShouldBe(actual);
 
