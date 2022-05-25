@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Contracts
 {
-    public interface IMainWordPicker
+    public interface IInputControler
     {
         string InputVerifyer(string inputWord);
     }

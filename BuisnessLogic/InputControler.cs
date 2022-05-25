@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BuisnessLogic
 {
-    public class WordPicker : IMainWordPicker //ne wordpickeris
+    public class InputControler : IInputControler //ne wordpickeris
     {
 
         public string InputVerifyer(string mainWordForAnagram)

@@ -44,7 +44,7 @@ namespace AnagramSolver
         }
         public static string MainWord()
         {
-            IMainWordPicker mainWordPicker = new WordPicker();
+            IInputControler mainWordPicker = new InputControler();
 
             Console.WriteLine("Enter a word and get anagram, if you want to quit write 'quit': ");
 

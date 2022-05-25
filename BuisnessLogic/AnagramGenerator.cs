@@ -8,6 +8,11 @@ namespace BuisnessLogic
 {
     public class AnagramGenerator : IAnagramGenerator
     {
+        public AnagramGenerator()
+        {
+
+        }
+
         public string AnagramGeneratorMethod(string inputWord, IWordSorter wordSorter, Dictionary<string, List<string>> wordsInDictionary)
         {
             // From list to dictionary 

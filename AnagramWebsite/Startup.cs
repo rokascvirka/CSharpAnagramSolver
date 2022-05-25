@@ -22,6 +22,11 @@ namespace AnagramWebsite
         {
             services.AddControllersWithViews();
             services.AddTransient<IAnagramGenerator, AnagramGenerator>();
+            services.AddTransient<ITxtReader, TxtReader>();
+            services.AddTransient<IDictGenerator, DictionaryGenerator>();
+            services.AddTransient<IWordSorter, WordSorter>();
+            services.AddTransient<IInputControler, InputControler>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,8 +52,14 @@ namespace AnagramWebsite
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
+                    name: "default", // nesupranta, kas default'as kontroleris ar id
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "defaultId", // nesupranta, kas default'as kontroleris ar id
+                    pattern: "{id?}",
+                    defaults: new {controller = "Home", action = "Index" }
+                    );
             });
         }
     }
