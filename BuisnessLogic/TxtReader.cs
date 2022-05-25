@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Contracts;
 using System.IO;
+using Entity;
 
 namespace BuisnessLogic
 {
     public class TxtReader : ITxtReader
     {
-        public List<string> TxtFileReader(string txtFilePath)
+        public List<Word> TxtFileReader(string txtFilePath)
         {
            Console.WriteLine("LOADING...");
 
@@ -25,7 +26,7 @@ namespace BuisnessLogic
                 }
             }
 
-            var listDictionary = new List<string>();
+            var listDictionary = new List<Word>();
 
             foreach (var line in txtFile)
             {
@@ -34,9 +35,14 @@ namespace BuisnessLogic
                 var info = sentence[0];
                 for (int i = 0; i < 2; i++)
                 {
-                    if (!listDictionary.Contains(info.ToString().ToLower()))
+
+
+                    if (!listDictionary.Any<Word>(a => a.word == info.ToLower()))
                     {
-                        listDictionary.Add(info.ToString().ToLower());
+                        var entity = new Word();
+
+                        entity.word = info.ToLower();
+                        listDictionary.Add(entity);
                     }
                 }
             }

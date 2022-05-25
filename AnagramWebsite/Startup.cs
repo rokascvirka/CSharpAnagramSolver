@@ -56,6 +56,10 @@ namespace AnagramWebsite
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
+                    name: "defaultDictionary", // nesupranta, kas default'as kontroleris ar id
+                    pattern: "{controller=Home}/{action=WordsList}");
+
+                endpoints.MapControllerRoute(
                     name: "defaultId", // nesupranta, kas default'as kontroleris ar id
                     pattern: "{id?}",
                     defaults: new {controller = "Home", action = "Index" }

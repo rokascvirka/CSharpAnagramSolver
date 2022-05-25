@@ -34,6 +34,7 @@ namespace AnagramWebsite.Controllers
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas1" + ".txt";
             var words = txtReader.TxtFileReader(textFilePath);
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
+
             var validation = inputControler.InputVerifyer(id);
             if (validation == "valid")
             {
@@ -49,6 +50,14 @@ namespace AnagramWebsite.Controllers
             }
 
             return View();
+        }
+
+        public IActionResult WordsList()
+        {
+            var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas1" + ".txt";
+            var words = txtReader.TxtFileReader(textFilePath);
+
+            return View(words);
         }
 
         public IActionResult Privacy()

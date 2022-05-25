@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Entity.Word>
+
+@{
+    ViewData["Title"] = "WordsList";
+}
+
+<h1>WordsList</h1>
+
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @item.ToString()<br />
+    </td>
+</tr>
+}
+

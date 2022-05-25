@@ -14,7 +14,7 @@ namespace AnagrameGeneratorUnitTests
         public void When_BadInput_Expect_AnError(string word, string actual)
         {
             //Act
-            WordPicker picker = new WordPicker();
+            InputControler picker = new InputControler();
 
             word = word.RemoveSpaces();
 
