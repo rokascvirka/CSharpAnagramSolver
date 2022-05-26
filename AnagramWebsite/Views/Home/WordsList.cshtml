@@ -9,6 +9,10 @@
 }
 
 <h1>WordsList</h1>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    @Html.TextBox("id")<input type="submit" value="Search" />
+}
 
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("WordsList", new { page = page }),
     new X.PagedList.Web.Common.PagedListRenderOptions
@@ -25,24 +29,19 @@
         {
         <tr>
             <td>
-
-                @Html.ActionLink(
-                        item.ToString(),
-                        "Index",
-                        item.ToString()
-                        )<br />
+                @Html.RouteLink(item.ToString(), new { controller = "Home", action = "Index", id = item})<br />
             </td>
         </tr>
     }
-        
-</table>
 
-            @section Scripts
+    </table>
+
+    @section Scripts
 {
-                <script>
-                    $(document).ready(function () {
-                        $('ul.pagination > li.disabled > a').addClass('page-link');
-                    });
-                </script>
-}
+        <script>
+            $(document).ready(function () {
+                $('ul.pagination > li.disabled > a').addClass('page-link');
+            });
+        </script>
+    }
 
