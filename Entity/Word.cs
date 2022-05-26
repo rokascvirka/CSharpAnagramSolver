@@ -8,7 +8,7 @@ namespace Entity
 
         public override string ToString()
         {
-            return word + "!";
+            return word;
         }
     }
 }

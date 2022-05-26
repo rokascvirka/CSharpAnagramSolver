@@ -2,11 +2,7 @@
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AnagramWebsite.Controllers
 {
@@ -31,7 +27,7 @@ namespace AnagramWebsite.Controllers
 
         public IActionResult Index(string id)
         {
-            var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas1" + ".txt";
+            var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
             var words = txtReader.TxtFileReader(textFilePath);
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
 
@@ -54,7 +50,7 @@ namespace AnagramWebsite.Controllers
 
         public IActionResult WordsList()
         {
-            var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas1" + ".txt";
+            var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
             var words = txtReader.TxtFileReader(textFilePath);
 
             return View(words);

@@ -15,6 +15,7 @@ namespace BuisnessLogic
 
 
             List<string> txtFile = new List<string>();
+            var wordList = new HashSet<string>();
 
             using ( var streamReader = new StreamReader(txtFilePath))
             {
@@ -37,16 +38,17 @@ namespace BuisnessLogic
                 {
 
 
-                    if (!listDictionary.Any<Word>(a => a.word == info.ToLower()))
+                    if (!wordList.Contains(info.ToLower()))
                     {
-                        var entity = new Word();
-
-                        entity.word = info.ToLower();
+                        var entity = new Word
+                        {
+                            word = info.ToLower()
+                        };
                         listDictionary.Add(entity);
+                        wordList.Add(info.ToLower());
                     }
                 }
             }
-
             return listDictionary;
         }
     }
