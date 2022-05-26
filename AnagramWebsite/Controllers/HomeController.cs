@@ -3,6 +3,7 @@ using Contracts;
 using Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using X.PagedList;
@@ -52,16 +53,27 @@ namespace AnagramWebsite.Controllers
             return View();
         }
 
-        public IActionResult WordsList(string searching, int? page)
+        public IActionResult WordsList(string searchString, int? page)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
             var words = txtReader.TxtFileReader(textFilePath);
 
             var pageNumber = page ?? 1;
             int pageSize = 100;
-            var onePageOfWords = words.ToPagedList(pageNumber, pageSize);
 
-            return View(onePageOfWords);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var foundwords = words.Where(w => w.word.Contains(searchString)).ToList();
+
+                var foundWordsPageOfWords = foundwords.ToPagedList(pageNumber, pageSize);
+
+                return View(foundWordsPageOfWords);
+            } 
+            else
+            {
+                var onePageOfWords = words.ToPagedList(pageNumber, pageSize);
+                return View(onePageOfWords);
+            }
         }
 
         public IActionResult Privacy()
