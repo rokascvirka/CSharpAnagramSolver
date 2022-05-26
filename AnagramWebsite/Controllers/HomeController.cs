@@ -3,6 +3,8 @@ using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using X.PagedList;
+
 
 namespace AnagramWebsite.Controllers
 {
@@ -48,12 +50,15 @@ namespace AnagramWebsite.Controllers
             return View();
         }
 
-        public IActionResult WordsList()
+        public IActionResult WordsList(int? page)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
             var words = txtReader.TxtFileReader(textFilePath);
 
-            return View(words);
+            var pageNumber = page ?? 1;
+            int pageSize = 100;
+            var onePageOfWords = words.ToPagedList(pageNumber, pageSize);
+            return View(onePageOfWords);
         }
 
         public IActionResult Privacy()
