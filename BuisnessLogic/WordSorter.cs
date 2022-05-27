@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Contracts;
 
-namespace BuisnessLogic 
+namespace BuisnessLogic
 {
     public class WordSorter : IWordSorter
     {

@@ -16,12 +16,12 @@ namespace BuisnessLogic
         public string AnagramGeneratorMethod(string inputWord, IWordSorter wordSorter, Dictionary<string, List<string>> wordsInDictionary)
         {
             // From list to dictionary 
-            var anagramWord = inputWord; 
+            var anagramWord = inputWord;
 
-            var sortedMainWordForAnagram = wordSorter.SortRandomWord(anagramWord); 
+            var sortedMainWordForAnagram = wordSorter.SortRandomWord(anagramWord);
             if (!wordsInDictionary.ContainsKey(sortedMainWordForAnagram))
             {
-                var result = String.Format("There is no word like this in dict and it doesn't have any anagrams"); 
+                var result = String.Format("There is no word like this in dict and it doesn't have any anagrams");
                 return result;
             }
             else
@@ -37,7 +37,7 @@ namespace BuisnessLogic
                         if (anagramWord != newRandom)
                         {
                             randomValueInList = newRandom;
-                            var result =  String.Format("This word: {0} anagram: {1} (After a while loop)", anagramWord, randomValueInList);
+                            var result = String.Format("This word: {0} anagram: {1} (After a while loop)", anagramWord, randomValueInList);
                             return result;
                         }
                     }
@@ -51,7 +51,8 @@ namespace BuisnessLogic
             }
         }
 
-        private string GetRandomAnagram(string sortedMainWordForAnagram, Dictionary<string, List<string>> wordsInDictionary) {
+        private string GetRandomAnagram(string sortedMainWordForAnagram, Dictionary<string, List<string>> wordsInDictionary)
+        {
 
             var random = new Random();
             var valueListLength = wordsInDictionary[sortedMainWordForAnagram].Count;
@@ -80,14 +81,14 @@ namespace BuisnessLogic
                 {
                     return 1;
                 }
-                else 
+                else
                 {
                     return 2;
                 }
             }
         }
 
-        public string ShowAnagram(int answer, string anagramWord, string randomValueInList) 
+        public string ShowAnagram(int answer, string anagramWord, string randomValueInList)
         {
             if (answer == 1)
             {

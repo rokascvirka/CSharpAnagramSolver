@@ -57,5 +57,5 @@ namespace BuisnessLogic
             }
             return listDictionary;
         }
-    }     
+    }
 }

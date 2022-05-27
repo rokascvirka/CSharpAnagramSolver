@@ -55,7 +55,7 @@ namespace AnagramSolver
             {
                 return inputWord;
             }
-        
+
             else
             {
                 var error = mainWordPicker.InputVerifyer(inputWord);
@@ -87,5 +87,3 @@ namespace AnagramSolver
         }
     }
 }
-
-

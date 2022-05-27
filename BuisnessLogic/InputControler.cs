@@ -9,7 +9,7 @@ namespace BuisnessLogic
 
         public string InputVerifyer(string mainWordForAnagram)
         {
-            if(mainWordForAnagram != null)
+            if (mainWordForAnagram != null)
             {
                 foreach (char letter in mainWordForAnagram)
                 {

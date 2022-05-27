@@ -40,7 +40,7 @@ namespace AnagramWebsite.Controllers
             if (id != null)
             {
                 var validation = inputControler.InputVerifyer(id);
-                
+
                 if (validation == "valid")
                 {
                     id = id.ToLower();
@@ -54,7 +54,7 @@ namespace AnagramWebsite.Controllers
                     ViewData["Message"] = validation;
                 }
             }
-            
+
             return View();
         }
 
@@ -74,7 +74,7 @@ namespace AnagramWebsite.Controllers
                 var foundWordsPageOfWords = foundwords.ToPagedList(pageNumber, pageSize);
 
                 return View(foundWordsPageOfWords);
-            } 
+            }
             else
             {
                 var onePageOfWords = words.ToPagedList(pageNumber, pageSize);

@@ -7,6 +7,6 @@ namespace Contracts
 {
     public interface IDictGenerator
     {
-          Dictionary<string, List<string>> DictGenerator(List<Word> words);
+        Dictionary<string, List<string>> DictGenerator(List<Word> words);
     }
 }
