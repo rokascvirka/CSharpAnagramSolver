@@ -35,21 +35,24 @@ namespace AnagramWebsite.Controllers
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
             var words = txtReader.TxtFileReader(textFilePath);
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
-
-            var validation = inputControler.InputVerifyer(id);
-            if (validation == "valid")
+            if (id != null)
             {
-                id = id.ToLower();
-                var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
-
-                ViewData["Message"] = anagram;
+                var validation = inputControler.InputVerifyer(id);
                 
-            }
-            else
-            {
-                ViewData["Message"] = validation;
-            }
+                if (validation == "valid")
+                {
+                    id = id.ToLower();
+                    var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
 
+                    ViewData["Message"] = anagram;
+
+                }
+                else
+                {
+                    ViewData["Message"] = validation;
+                }
+            }
+            
             return View();
         }
 
