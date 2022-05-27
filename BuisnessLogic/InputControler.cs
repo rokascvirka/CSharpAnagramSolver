@@ -21,5 +21,15 @@ namespace BuisnessLogic
             }
             return "valid";
         }
+
+        public string NullVerifyer(string mainWordForAnagram)
+        {
+            if (String.IsNullOrWhiteSpace(mainWordForAnagram))
+            {
+                return "Please enter any word, because string can't be null or empty";
+            }
+
+            return InputVerifyer(mainWordForAnagram);
+        }
     }
 }

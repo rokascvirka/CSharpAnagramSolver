@@ -26,7 +26,8 @@ namespace AnagramSolver
                 Environment.Exit(0);
             }
 
-            var words = TxtFilerReader.TxtFileReader(textFileNameInput);
+            var txtFile = TxtFilerReader.TxtFileReader(textFileNameInput);
+            var words = TxtFilerReader.FirstWordReader(txtFile);
 
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
 

@@ -7,6 +7,7 @@ namespace Contracts
 {
     public interface ITxtReader
     {
-        List<Word> TxtFileReader(string txtFilePath);
+        List<string> TxtFileReader(string txtFilePath);
+        List<Word> FirstWordReader(List<string> txtFile);
     }
 }

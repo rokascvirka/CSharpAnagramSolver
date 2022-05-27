@@ -33,7 +33,9 @@ namespace AnagramWebsite.Controllers
         public IActionResult Index(string id)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
-            var words = txtReader.TxtFileReader(textFilePath);
+            var txtfile = txtReader.TxtFileReader(textFilePath);
+            var words = txtReader.FirstWordReader(txtfile);
+
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
             if (id != null)
             {
@@ -59,7 +61,8 @@ namespace AnagramWebsite.Controllers
         public IActionResult WordsList(string searchString, int? page)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
-            var words = txtReader.TxtFileReader(textFilePath);
+            var txtfile = txtReader.TxtFileReader(textFilePath);
+            var words = txtReader.FirstWordReader(txtfile);
 
             var pageNumber = page ?? 1;
             int pageSize = 100;
@@ -79,8 +82,9 @@ namespace AnagramWebsite.Controllers
             }
         }
 
-        public IActionResult Privacy()
+        public IActionResult AddNewWordInFile(string word)
         {
+
             return View();
         }
 

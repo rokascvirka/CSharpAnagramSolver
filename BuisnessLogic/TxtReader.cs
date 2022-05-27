@@ -9,15 +9,15 @@ namespace BuisnessLogic
 {
     public class TxtReader : ITxtReader
     {
-        public List<Word> TxtFileReader(string txtFilePath)
+        public List<string> TxtFileReader(string txtFilePath)
         {
-           Console.WriteLine("LOADING...");
+            Console.WriteLine("LOADING...");
 
 
             List<string> txtFile = new List<string>();
-            var wordList = new HashSet<string>();
 
-            using ( var streamReader = new StreamReader(txtFilePath))
+
+            using (var streamReader = new StreamReader(txtFilePath))
             {
                 string line;
 
@@ -27,6 +27,12 @@ namespace BuisnessLogic
                 }
             }
 
+            return txtFile;
+        }
+        public List<Word> FirstWordReader(List<string> txtFile)
+        {
+
+            var wordList = new HashSet<string>();
             var listDictionary = new List<Word>();
 
             foreach (var line in txtFile)
@@ -51,5 +57,5 @@ namespace BuisnessLogic
             }
             return listDictionary;
         }
-    }
+    }     
 }
