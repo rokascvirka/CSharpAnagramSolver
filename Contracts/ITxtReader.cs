@@ -9,5 +9,6 @@ namespace Contracts
     {
         List<string> TxtFileReader(string txtFilePath);
         List<Word> FirstWordReader(List<string> txtFile);
+        List<string> AddWordToFile(string txtFilePath, string newWord);
     }
 }

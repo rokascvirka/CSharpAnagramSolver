@@ -29,6 +29,7 @@ namespace BuisnessLogic
 
             return txtFile;
         }
+
         public List<Word> FirstWordReader(List<string> txtFile)
         {
 
@@ -56,6 +57,18 @@ namespace BuisnessLogic
                 }
             }
             return listDictionary;
+        }
+        public List<string> AddWordToFile(string txtFilePath, string newWord)
+        {
+            List<string> txtFile = new List<string>();
+
+
+            using (var streamWriter = new StreamWriter(txtFilePath, append: true))
+            {
+                streamWriter.WriteLine(newWord);
+            }
+
+            return txtFile;
         }
     }
 }

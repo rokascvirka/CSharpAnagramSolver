@@ -9,9 +9,11 @@ using System.Linq;
 using X.PagedList;
 
 
+
+
 namespace AnagramWebsite.Controllers
 {
-    public class HomeController : Controller
+        public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IAnagramGenerator anagramGenerator;
@@ -88,6 +90,7 @@ namespace AnagramWebsite.Controllers
             var txtfile = txtReader.TxtFileReader(textFilePath);
             var words = txtReader.FirstWordReader(txtfile);
 
+
             if (AddString != null)
             {
                 var validation = inputControler.InputVerifyer(AddString);
@@ -95,19 +98,17 @@ namespace AnagramWebsite.Controllers
                 if (validation == "valid")
                 {
                     AddString = AddString.ToLower();
-                    var entity = new Word
-                    {
-                        word = AddString
-                    };
 
-                    if (words.Contains(entity))
+
+                    if (words.Any(x => x.word == AddString))
                     {
-                        ViewData["Message"] = entity.ToString() + " is already in list";
+                        ViewData["Message"] = AddString + " is already in list";
                     }
                     else
                     {
-                        words.Insert(0, entity);
-                        ViewData["Message"] = entity.ToString() + " added";
+                        txtReader.AddWordToFile(textFilePath, AddString);
+                        words.OrderBy(x => x.word).ToList();
+                        ViewData["Message"] = AddString + " added";
                     }
                 }
                 else
