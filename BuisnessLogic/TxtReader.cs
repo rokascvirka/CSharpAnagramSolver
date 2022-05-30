@@ -21,10 +21,12 @@ namespace BuisnessLogic
             {
                 string line;
 
-                while ((line = streamReader.ReadLine()) != null)
+                while ((line = streamReader.ReadLine()) != null) 
                 {
-                    txtFile.Add(line);
+                        txtFile.Add(line);
                 }
+
+
             }
 
             return txtFile;
@@ -41,18 +43,23 @@ namespace BuisnessLogic
                 var sentence = line.Replace(" ", "").Split();
 
                 var info = sentence[0];
+
                 for (int i = 0; i < 2; i++)
                 {
 
-
-                    if (!wordList.Contains(info.ToLower()))
+                    foreach (char letter in info)
                     {
-                        var entity = new Word
+
+                        if (!wordList.Contains(info.ToLower()) && info.All(x => Char.IsLetter(x)))
                         {
-                            word = info.ToLower()
-                        };
-                        listDictionary.Add(entity);
-                        wordList.Add(info.ToLower());
+                            var entity = new Word
+                            {
+                                word = info.ToLower()
+                            };
+                            listDictionary.Add(entity);
+                            wordList.Add(info.ToLower());
+                        }
+
                     }
                 }
             }
