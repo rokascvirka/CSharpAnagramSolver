@@ -107,7 +107,7 @@ namespace AnagramWebsite.Controllers
                     else
                     {
                         txtReader.AddWordToFile(textFilePath, AddString);
-                        words.OrderBy(x => x.word).ToList();
+                        words.OrderBy(x => x.word);
                         ViewData["Message"] = AddString + " added";
                     }
                 }

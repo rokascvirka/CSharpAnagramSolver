@@ -38,6 +38,7 @@ namespace BuisnessLogic
             var wordList = new HashSet<string>();
             var listDictionary = new List<Word>();
 
+
             foreach (var line in txtFile)
             {
                 var sentence = line.Replace(" ", "").Split();
@@ -63,7 +64,9 @@ namespace BuisnessLogic
                     }
                 }
             }
-            return listDictionary;
+            List<Word> sortedDictionary = listDictionary.OrderBy(x => x.word).ToList();
+
+            return sortedDictionary;
         }
         public List<string> AddWordToFile(string txtFilePath, string newWord)
         {
