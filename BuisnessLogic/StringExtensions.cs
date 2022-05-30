@@ -8,17 +8,10 @@ namespace BuisnessLogic
     {
         public static string RemoveSpaces(this string word) 
         {
-            var inputWord = word.ToCharArray();
-            var correctInput = "";
+            word =  word.Replace("\t", string.Empty);
+            word = word.Replace(" ", string.Empty);
 
-            foreach (char letter in inputWord)
-            {
-                if (!Char.IsWhiteSpace(letter))
-                {
-                    correctInput += letter;
-                }
-            }
-            return correctInput;
+            return word;
         }
     }
 }
