@@ -82,8 +82,39 @@ namespace AnagramWebsite.Controllers
             }
         }
 
-        public IActionResult AddNewWordInFile(string word)
+        public IActionResult AddNewWordInFile(string AddString)
         {
+            var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
+            var txtfile = txtReader.TxtFileReader(textFilePath);
+            var words = txtReader.FirstWordReader(txtfile);
+
+            if (AddString != null)
+            {
+                var validation = inputControler.InputVerifyer(AddString);
+
+                if (validation == "valid")
+                {
+                    AddString = AddString.ToLower();
+                    var entity = new Word
+                    {
+                        word = AddString
+                    };
+
+                    if (words.Contains(entity))
+                    {
+                        ViewData["Message"] = entity.ToString() + " is already in list";
+                    }
+                    else
+                    {
+                        words.Insert(0, entity);
+                        ViewData["Message"] = entity.ToString() + " added";
+                    }
+                }
+                else
+                {
+                    ViewData["Message"] = validation;
+                }
+            }
 
             return View();
         }
