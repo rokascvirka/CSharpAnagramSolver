@@ -36,7 +36,9 @@ namespace AnagrameGeneratorUnitTests
         [TestCase(0, "alus", "", "This word: alus doesn't have anagram in our dictionary")]
         public void When_EnteredResultIsGood_Expect_KnownOutPut(int answer, string anagramWord, string randomValueInList, string actual)
         {
+
             AnagramGenerator generator = new AnagramGenerator();
+
             string expected = generator.ShowAnagram(answer, anagramWord, randomValueInList);
 
             Assert.AreEqual(expected, actual);

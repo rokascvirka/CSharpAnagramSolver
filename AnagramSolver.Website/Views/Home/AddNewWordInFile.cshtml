@@ -1,0 +1,25 @@
+﻿@model BuisnessLogic.TxtReader
+
+@{
+    ViewData["Title"] = "AddNewWordInFile";
+}
+
+<h1>AddNewWordInFile</h1>
+
+<h4>TxtReader</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            <p>
+                Add Word: @Html.TextBox("AddString") <input type="submit" value="Add" />
+            </p>
+        }
+    </div>
+</div>
+    <h3>@ViewData["Message"]</h3>
+
+<div>
+    <a asp-action="WordsList">Back to List</a>
+</div>

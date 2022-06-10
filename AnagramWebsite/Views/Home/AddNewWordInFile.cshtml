@@ -4,17 +4,15 @@
     ViewData["Title"] = "AddNewWordInFile";
 }
 
-<h1>AddNewWordInFile</h1>
+<h1>Add New Word In File</h1>
 
-<h4>TxtReader</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         @using (Html.BeginForm())
         {
-            <p>
-                Add Word: @Html.TextBox("AddString") <input type="submit" value="Add" />
-            </p>
+            
+                @Html.TextBox("AddString")<input type="submit" value="Add" />  
         }
     </div>
 </div>

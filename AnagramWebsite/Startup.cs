@@ -10,6 +10,7 @@ namespace AnagramWebsite
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,6 +22,7 @@ namespace AnagramWebsite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddControllers();
             services.AddTransient<IAnagramGenerator, AnagramGenerator>();
             services.AddTransient<ITxtReader, TxtReader>();
             services.AddTransient<IDictGenerator, DictionaryGenerator>();

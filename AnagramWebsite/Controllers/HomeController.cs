@@ -11,7 +11,7 @@ using X.PagedList;
 
 
 
-namespace AnagramWebsite.Controllers
+namespace AnagramSolverWebsite.Controllers
 {
         public class HomeController : Controller
     {

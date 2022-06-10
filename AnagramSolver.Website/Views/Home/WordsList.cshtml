@@ -1,0 +1,49 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Web.Common;
+
+@model IEnumerable<Entity.Word>
+
+@{
+    ViewData["Title"] = "WordsList";
+}
+
+<h1>WordsList</h1>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("WordsList", new { page = page }),
+    new X.PagedList.Web.Common.PagedListRenderOptions
+    {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+    })
+<table>
+    <tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.RouteLink(item.ToString(), new { controller = "Home", action = "Index", id = item })<br />
+            </td>
+        </tr>
+    }
+
+    </table>
+
+    @section Scripts
+{
+        <script>
+            $(document).ready(function () {
+                $('ul.pagination > li.disabled > a').addClass('page-link');
+            });
+        </script>
+    }
