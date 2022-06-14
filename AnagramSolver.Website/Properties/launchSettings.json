@@ -24,14 +24,5 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
-  },
-  "MakingHttpRequest": {
-    "commandName": "Project",
-    "launchBrowser": true,
-    "launchUrl": "api/Values/GenerateAnamgram?id=alus"
-    "applicationUrl": "https://localhost:7208;http://localhost:5208",
-    "environmentVariables": {
-      "ASPNETCORE_ENVIRONMENT": "Development"
-    }
   }
 }
