@@ -5,7 +5,8 @@ using Contracts;
 
 namespace AnagramSolver.Website.Controllers
 {
-    [Route("api/{controller}/{action}/{id?}")] //api/{controller}/{action}
+
+    [Route("api/{controller}/{action}/{id?}")] //api/{controller}/{action} 
     [ApiController]
     public class ValuesController : ControllerBase
     {
@@ -25,7 +26,6 @@ namespace AnagramSolver.Website.Controllers
             this.inputControler = inputControler;
         }
         //objektas JSON formatu
-        [HttpGet]
         public string GenerateAnagram(string id)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
@@ -47,13 +47,22 @@ namespace AnagramSolver.Website.Controllers
                 }
                 else
                 {
-                     return validation;
+                    return validation;
                 }
             }
 
             return string.Empty;
         }
+
+        // pasirasyt kad grazintu JSON'a
         [HttpGet]
+        public async Task<string> Get(string id)
+        {
+            var URL = $"https://localhost:7208/api/Values/GenerateAnagram/{id}";
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(URL);
+            return await response.Content.ReadAsStringAsync();
+        }
     }
 }
 

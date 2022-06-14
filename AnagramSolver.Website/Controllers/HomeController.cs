@@ -1,11 +1,7 @@
 ﻿using AnagramSolver.Website.Models;
 using Contracts;
-using Entity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Diagnostics;
-using System.Linq;
 using X.PagedList;
 
 

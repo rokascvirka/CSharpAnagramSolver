@@ -4,45 +4,30 @@ using System.Collections.Generic;
 using Contracts;
 using System.Linq;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace AnagramSolver
 {
     class Program
     {
-        static void Main(string[] args)
+        HttpClient client = new HttpClient();
+        static async Task Main(string[] args)
         {
-            IWordSorter wordSorter = new WordSorter();
+            var program = new Program();
+            await program.GetAnagramFromApi();
 
-            IDictGenerator dictionaryGenerator = new DictionaryGenerator();
-
-            IAnagramGenerator anagramGenerator = new AnagramGenerator();
-
-            ITxtReader TxtFilerReader = new TxtReader();
-
-            var textFileNameInput = ChooseWordsDictionaryFile();
-
-            if (textFileNameInput == "quit")
-            {
-                Environment.Exit(0);
-            }
-
-            var txtFile = TxtFilerReader.TxtFileReader(textFileNameInput);
-            var words = TxtFilerReader.FirstWordReader(txtFile);
-
-            var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
-
-            while (true)
-            {
-                var inputWord = MainWord();
-
-                if (inputWord == "quit")
-                {
-                    break;
-                }
-
-                Console.WriteLine(anagramGenerator.AnagramGeneratorMethod(inputWord, wordSorter, wordsInDictionary));
-            }
         }
+
+        private async Task GetAnagramFromApi()
+        {
+            Console.WriteLine("Enter the word: ");
+            var id = Console.ReadLine();
+            string response = await client.GetStringAsync("id: " + $"https://localhost:7208/api/Values/GenerateAnagram/{id}");
+
+            Console.WriteLine(response);
+        }
+
         public static string MainWord()
         {
             IInputControler mainWordPicker = new InputControler();
