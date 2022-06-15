@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Contracts;
-
+using RestSharp;
 
 namespace AnagramSolver.Website.Controllers
 {
@@ -25,7 +25,6 @@ namespace AnagramSolver.Website.Controllers
             this.wordSorter = wordSorter;
             this.inputControler = inputControler;
         }
-        //objektas JSON formatu
         public string GenerateAnagram(string id)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
@@ -42,26 +41,16 @@ namespace AnagramSolver.Website.Controllers
                     id = id.ToLower();
                     var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
 
-                    return anagram;
+                    return "{id : " + '"'+ anagram +'"' + "}";
 
                 }
                 else
                 {
-                    return validation;
+                    return "{id : " + '"' + validation + '"' + "}";
                 }
             }
 
             return string.Empty;
-        }
-
-        // pasirasyt kad grazintu JSON'a
-        [HttpGet]
-        public async Task<string> Get(string id)
-        {
-            var URL = $"https://localhost:7208/api/Values/GenerateAnagram/{id}";
-            var httpClient = new HttpClient();
-            var response = await httpClient.GetAsync(URL);
-            return await response.Content.ReadAsStringAsync();
         }
     }
 }

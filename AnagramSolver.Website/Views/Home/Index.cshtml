@@ -9,7 +9,7 @@
     @using (Html.BeginForm(FormMethod.Get))
     {
         @Html.TextBox("id")
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" name="coockievalue" />
     }
 
     <h3>@ViewData["Message"]</h3>

@@ -1,7 +1,10 @@
 ﻿using AnagramSolver.Website.Models;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using X.PagedList;
 
 
@@ -45,15 +48,35 @@ namespace AnagramSolverWebsite.Controllers
                     var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
 
                     ViewData["Message"] = anagram;
-
+                    WriteCookie(id);
                 }
                 else
                 {
                     ViewData["Message"] = validation;
+                    WriteCookie(id);
                 }
             }
 
             return View();
+        }
+        public void WriteCookie(string cookievalue)
+        {
+            StringBuilder words = new StringBuilder();
+            var cookies = new CookieOptions();
+            DateTime now = DateTime.Now;
+            cookies.Expires = DateTime.Now.AddDays(1);
+            words.Append($"{ Request.Cookies["name"]}, {cookievalue}, {now}");
+            Response.Cookies.Append("name", words.ToString());
+        }
+
+        public IActionResult ReadCookie()
+        {
+            ViewBag.CookieValue = Request.Cookies["name"];
+            return View();
+        }
+        public IActionResult RemoveCookie()
+        {
+            return RedirectToAction("Index");
         }
 
         public IActionResult WordsList(string searchString, int? page)

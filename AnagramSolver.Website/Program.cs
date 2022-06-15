@@ -18,7 +18,7 @@ builder.Services.AddTransient<ITxtReader, TxtReader>();
 builder.Services.AddTransient<IDictGenerator, DictionaryGenerator>();
 builder.Services.AddTransient<IWordSorter, WordSorter>();
 builder.Services.AddTransient<IInputControler, InputControler>();
-builder.Services.AddHttpClient();
+
 
 var app = builder.Build();
 
