@@ -1,5 +1,7 @@
 using BuisnessLogic;
 using Contracts;
+using Anagram.Database;
+using Contracts.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +20,7 @@ builder.Services.AddTransient<ITxtReader, TxtReader>();
 builder.Services.AddTransient<IDictGenerator, DictionaryGenerator>();
 builder.Services.AddTransient<IWordSorter, WordSorter>();
 builder.Services.AddTransient<IInputControler, InputControler>();
+builder.Services.AddTransient<IWordRepository, DataBaseWordRepository>();
 
 
 var app = builder.Build();

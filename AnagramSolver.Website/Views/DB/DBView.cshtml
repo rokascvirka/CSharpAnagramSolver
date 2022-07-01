@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Contracts.Models.WordModel>
+
+@{
+    ViewData["Title"] = "DBView";
+}
+
+<h1>DBView</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Word)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pronoun)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Word)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pronoun)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

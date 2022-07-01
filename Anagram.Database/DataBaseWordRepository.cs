@@ -12,7 +12,7 @@ using System.Data.Common;
 
 namespace Anagram.Database
 {
-    internal class DataBaseWordRepository : IWordRepository //gali naudpt web, gali naudot console.
+    public class DataBaseWordRepository : IWordRepository //gali naudpt web, gali naudot console.
     {
         public HashSet<WordModel> GetWords()
         {

@@ -61,7 +61,6 @@ namespace Anagram.Database
 
             var hsetas = data.GetWords();
 
-            connection.Close();
         }
     }
 }
