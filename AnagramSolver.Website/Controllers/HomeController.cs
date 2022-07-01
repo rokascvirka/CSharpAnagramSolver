@@ -65,7 +65,7 @@ namespace AnagramSolverWebsite.Controllers
             var cookies = new CookieOptions();
             DateTime now = DateTime.Now;
             cookies.Expires = DateTime.Now.AddDays(1);
-            words.Append($"{ Request.Cookies["name"]}, {cookievalue}, {now}");
+            words.Append($"{Request.Cookies["name"]}, {cookievalue}, {now}");
             Response.Cookies.Append("name", words.ToString());
         }
 
@@ -146,6 +146,3 @@ namespace AnagramSolverWebsite.Controllers
         }
     }
 }
-
-
- 

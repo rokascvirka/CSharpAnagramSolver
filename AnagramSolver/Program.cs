@@ -23,7 +23,7 @@ namespace AnagramSolver
         {
             Console.WriteLine("Enter the word: ");
             var id = Console.ReadLine();
-            string response = await client.GetStringAsync("{id: " + $"https://localhost:7208/api/Values/GenerateAnagram/{id}}");
+            string response = await client.GetStringAsync("{id: " + $"https://localhost:44368/api/Values/GenerateAnagram/{id}");
 
             Console.WriteLine(response);
         }
