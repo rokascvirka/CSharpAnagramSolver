@@ -6,9 +6,14 @@
 
 <h1>DBView</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+    <form method="get" asp-action="DbView">
+        <p>
+        <input type="search" placeholder="Search the word ..." value="@ViewData["Getword"]" name="WordSearch" style="width:500px;" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+        <a asp-action="DbView">Get word</a>
+        </p>
+    </form>
 <table class="table">
     <thead>
         <tr>
@@ -16,7 +21,8 @@
                 @Html.DisplayNameFor(model => model.Word)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pronoun)
+                <a asp-action="DbView" asp-route-sortingemp = "@ViewData["Pronoun"]">@Html.DisplayNameFor(model => model.Pronoun)</a>
+                
             </th>
             <th></th>
         </tr>

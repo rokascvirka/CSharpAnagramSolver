@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 namespace Anagram.Database
 {
     
-    internal partial class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
@@ -47,9 +47,6 @@ namespace Anagram.Database
                         command.Parameters.AddWithValue("@word", fields[0]);
                         command.Parameters.AddWithValue("@pronoun", fields[1]);
                     }
-                    
-
-
 
                     command.ExecuteNonQuery();
                 }
