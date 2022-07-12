@@ -20,8 +20,9 @@ namespace AnagramSolverWebsite.Controllers
         private readonly IDictGenerator dictionaryGenerator;
         private readonly IWordSorter wordSorter;
         private readonly IInputControler inputControler;
+        private readonly ICachedWord cachedWord;
 
-        public HomeController(ILogger<HomeController> logger, IAnagramGenerator anagramGenerator, ITxtReader txtReader, IDictGenerator dictionaryGenerator, IWordSorter wordSorter, IInputControler inputControler)
+        public HomeController(ILogger<HomeController> logger, IAnagramGenerator anagramGenerator, ITxtReader txtReader, IDictGenerator dictionaryGenerator, IWordSorter wordSorter, IInputControler inputControler, ICachedWord cachedWord)
         {
             _logger = logger;
             this.anagramGenerator = anagramGenerator;
@@ -29,14 +30,16 @@ namespace AnagramSolverWebsite.Controllers
             this.dictionaryGenerator = dictionaryGenerator;
             this.wordSorter = wordSorter;
             this.inputControler = inputControler;
+            this.cachedWord = cachedWord;
         }
 
         public IActionResult Index(string id)
         {
+            
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
             var txtfile = txtReader.TxtFileReader(textFilePath);
             var words = txtReader.FirstWordReader(txtfile);
-
+            
             var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
             if (id != null)
             {
@@ -48,11 +51,13 @@ namespace AnagramSolverWebsite.Controllers
                     var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
 
                     ViewData["Message"] = anagram;
+                    cachedWord.AddCacheToServer(id, anagram);
                     WriteCookie(id);
                 }
                 else
                 {
                     ViewData["Message"] = validation;
+                    cachedWord.AddCacheToServer(id, validation);
                     WriteCookie(id);
                 }
             }
