@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Contracts;
+using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
 
 namespace AnagramSolver.Website.Controllers
 {
+    [Route("controller/UserLog/")]
     public class UserLogController : Controller
     {
-        public IActionResult Index()
+        private readonly IWordRepository _repository;
+        public UserLogController(IWordRepository repository)
         {
-            return View();
+            _repository = repository;
+        }
+        [HttpGet]
+        public IActionResult UserLog()
+        {
+           var logList =  _repository.GetUserLogInfo();
+
+            return View(logList);
         }
     }
 }

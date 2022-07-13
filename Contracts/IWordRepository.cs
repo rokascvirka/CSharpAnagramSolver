@@ -1,6 +1,4 @@
-﻿
-
-using Contracts.Models;
+﻿using Contracts.Models;
 using System.Collections.Generic;
 
 namespace Contracts
@@ -8,5 +6,6 @@ namespace Contracts
     public interface IWordRepository
     {
         HashSet<WordModel> GetWords();
+        List<UserLogModel> GetUserLogInfo();
     }
 }

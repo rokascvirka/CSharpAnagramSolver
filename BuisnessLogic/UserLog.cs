@@ -12,9 +12,7 @@ namespace BuisnessLogic
     {
         private string UserIp { get; set; }
         private DateTime SearchTime { get; set; }
-
         private string Input { get; set; }
-
         private string Anagram { get; set; }
         public UserLog()
         {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Data.Common;
-
+using System.Data;
 
 namespace Anagram.Database
 {
@@ -37,6 +37,7 @@ namespace Anagram.Database
             {
                 var wordModel = new WordModel();
                 wordModel.Word = reader.GetString(0);
+                
 
                 if (reader.GetValue(1) != DBNull.Value)
                 {
@@ -50,5 +51,38 @@ namespace Anagram.Database
 
             return wordsList;
         }
+        public List<UserLogModel> GetUserLogInfo()
+        {
+            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
+
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = connectionString;
+            connection.Open();
+            // nuskaityti zodzius is lenteles
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader = null;
+            cmd.Connection = connection;
+
+            cmd.CommandText = "SELECT UserIP, SearchTime, SearchWord, Anagram from UserLog";
+
+            reader = cmd.ExecuteReader();
+
+            List<UserLogModel> wordsList = new List<UserLogModel>();
+            while (reader.Read())
+            {
+                var userLogModel = new UserLogModel();
+                userLogModel.UserIP = reader.GetString(0);
+                userLogModel.SearchTime = reader.GetString(1);
+                userLogModel.SearchWord = reader.GetString(2);
+                userLogModel.Anagram = reader.GetString(3);
+
+                wordsList.Add(userLogModel);
+            }
+
+            connection.Close();
+
+            return wordsList;
+        }
     }
+
 }

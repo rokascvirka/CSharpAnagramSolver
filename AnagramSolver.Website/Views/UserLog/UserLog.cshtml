@@ -1,0 +1,27 @@
+﻿@model List<Contracts.Models.UserLogModel>
+
+@{
+    ViewData["Title"] = "UserLog";
+}
+
+<h1>UserLog</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserIP)
+                @Html.DisplayFor(modelItem => item.SearchTime)
+                @Html.DisplayFor(modelItem => item.SearchWord)
+                @Html.DisplayFor(modelItem => item.Anagram)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
