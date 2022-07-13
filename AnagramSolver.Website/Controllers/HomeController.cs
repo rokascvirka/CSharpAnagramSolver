@@ -1,4 +1,5 @@
 ﻿using AnagramSolver.Website.Models;
+using BuisnessLogic;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
@@ -21,9 +22,11 @@ namespace AnagramSolverWebsite.Controllers
         private readonly IWordSorter wordSorter;
         private readonly IInputControler inputControler;
         private readonly ICachedWord cachedWord;
+        private readonly Contracts.IUserLog userLog;
        
 
-        public HomeController(ILogger<HomeController> logger, IAnagramGenerator anagramGenerator, ITxtReader txtReader, IDictGenerator dictionaryGenerator, IWordSorter wordSorter, IInputControler inputControler, ICachedWord cachedWord)
+        public HomeController(ILogger<HomeController> logger, IAnagramGenerator anagramGenerator, ITxtReader txtReader,
+            IDictGenerator dictionaryGenerator, IWordSorter wordSorter, IInputControler inputControler, ICachedWord cachedWord, Contracts.IUserLog userLog)
         {
             _logger = logger;
             this.anagramGenerator = anagramGenerator;
@@ -32,6 +35,7 @@ namespace AnagramSolverWebsite.Controllers
             this.wordSorter = wordSorter;
             this.inputControler = inputControler;
             this.cachedWord = cachedWord;
+            this.userLog = userLog;
         }
 
         public IActionResult Index(string id)
@@ -61,6 +65,8 @@ namespace AnagramSolverWebsite.Controllers
                     
                     cachedWord.AddCacheToServer(id, anagram);
                     WriteCookie(id);
+                    var log = new UserLog();
+                    log.AddUserLogToDB(id, anagram);
                 }
                 else
                 {
@@ -68,7 +74,10 @@ namespace AnagramSolverWebsite.Controllers
                     cachedWord.AddCacheToServer(id, validation);
                     WriteCookie(id);
                 }
+                
             }
+
+            
 
             return View();
         }

@@ -22,7 +22,7 @@ builder.Services.AddTransient<IWordSorter, WordSorter>();
 builder.Services.AddTransient<IInputControler, InputControler>();
 builder.Services.AddTransient<IWordRepository, DataBaseWordRepository>();
 builder.Services.AddTransient<ICachedWord, CachedWord>();
-
+builder.Services.AddTransient<IUserLog, UserLog>();
 
 var app = builder.Build();
 
