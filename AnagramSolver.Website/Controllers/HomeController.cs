@@ -21,6 +21,7 @@ namespace AnagramSolverWebsite.Controllers
         private readonly IWordSorter wordSorter;
         private readonly IInputControler inputControler;
         private readonly ICachedWord cachedWord;
+       
 
         public HomeController(ILogger<HomeController> logger, IAnagramGenerator anagramGenerator, ITxtReader txtReader, IDictGenerator dictionaryGenerator, IWordSorter wordSorter, IInputControler inputControler, ICachedWord cachedWord)
         {
@@ -49,8 +50,15 @@ namespace AnagramSolverWebsite.Controllers
                 {
                     id = id.ToLower();
                     var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
-
-                    ViewData["Message"] = anagram;
+                    if(cachedWord.ReturnWordIfInCasheWords(id) == "No values")
+                    {
+                        ViewData["Message"] = anagram;
+                    }
+                    else
+                    {
+                        ViewData["Message"] = cachedWord.ReturnWordIfInCasheWords(id);
+                    }
+                    
                     cachedWord.AddCacheToServer(id, anagram);
                     WriteCookie(id);
                 }

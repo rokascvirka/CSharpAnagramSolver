@@ -12,14 +12,6 @@ namespace BuisnessLogic
 {
     public class CachedWord : ICachedWord
     {
-        private readonly string _connectionString;
-
-
-        public CachedWord()
-        {
-
-        }
-
         public void AddCacheToServer(string input, string anagram)
         {
             var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
@@ -30,13 +22,15 @@ namespace BuisnessLogic
                 using (var connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
+                    if (CheckForWordInCasheTable(input) == false)
+                    {
+                        SqlCommand cmd = new SqlCommand("INSERT INTO CashedWords(Words, Anagram) " + "VALUES(@words, @anagram)", connection);
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO CashedWords(Words, Anagram) " + "VALUES(@words, @anagram)", connection);
+                        cmd.Parameters.Add(new SqlParameter("@words", input));
+                        cmd.Parameters.AddWithValue("@anagram", anagram);
 
-                    cmd.Parameters.Add(new SqlParameter("@words", input));
-                    cmd.Parameters.AddWithValue("@anagram", anagram);
-
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
 
                     connection.Close();
                 }
@@ -44,20 +38,51 @@ namespace BuisnessLogic
             }
         }
 
-        public List<string> CheckForWordInCasheTable(string input)
+        public bool CheckForWordInCasheTable(string input)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
+
+            using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT Words, Anagram FROM CachedWords WHERE Words=" + input, connection);
+                SqlCommand cmd = new SqlCommand( $"SELECT Words FROM CashedWords WHERE Words='{input}'", connection); 
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    connection.Close(); //Do I really need this?
+                    return true;
+                }
+                connection.Close(); //Do I really need this?
+                return false;
             }
 
+        }
 
+        public string ReturnWordIfInCasheWords(string input)
+        {
 
+            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
 
-            var list = new List<string>();
-            return list;
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                if (CheckForWordInCasheTable(input) == true)
+                {
+                    SqlCommand cmd = new SqlCommand($"SELECT Anagram From CashedWords Where Words = '{input}'", connection);
+                    SqlDataReader reader = null;
+                    reader = cmd.ExecuteReader();
+                    reader.Read();
+                    var text = reader.GetString(0);
+                    connection.Close();
+
+                    return text;
+
+                }
+                connection.Close();
+            }
+            return "No values";
         }
     }
 }
