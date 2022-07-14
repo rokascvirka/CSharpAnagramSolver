@@ -14,11 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogicUnitTests", ".
 		{EF3B9A1C-F70A-42F6-B8B1-6E34B79C79AA} = {EF3B9A1C-F70A-42F6-B8B1-6E34B79C79AA}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "..\Entity\Entity.csproj", "{31E86797-F70B-44B7-BAB5-783336F1DC1C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnagramSolver.Website", "..\AnagramSolver.Website\AnagramSolver.Website.csproj", "{DB8E2B93-613B-4E74-B12C-62C8AC6F0379}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anagram.Database", "..\Anagram.Database\Anagram.Database.csproj", "{F7A48E45-A770-458B-8C6C-5AF73E6E9A39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anagram.Database", "..\Anagram.Database\Anagram.Database.csproj", "{F7A48E45-A770-458B-8C6C-5AF73E6E9A39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +40,6 @@ Global
 		{91E83D6A-4F0F-459F-BADB-91D55A3AB055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91E83D6A-4F0F-459F-BADB-91D55A3AB055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91E83D6A-4F0F-459F-BADB-91D55A3AB055}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31E86797-F70B-44B7-BAB5-783336F1DC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31E86797-F70B-44B7-BAB5-783336F1DC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31E86797-F70B-44B7-BAB5-783336F1DC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31E86797-F70B-44B7-BAB5-783336F1DC1C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DB8E2B93-613B-4E74-B12C-62C8AC6F0379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DB8E2B93-613B-4E74-B12C-62C8AC6F0379}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB8E2B93-613B-4E74-B12C-62C8AC6F0379}.Release|Any CPU.ActiveCfg = Release|Any CPU

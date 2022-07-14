@@ -2,9 +2,7 @@
 using BuisnessLogic;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using X.PagedList;
 
@@ -21,12 +19,13 @@ namespace AnagramSolverWebsite.Controllers
         private readonly IDictGenerator dictionaryGenerator;
         private readonly IWordSorter wordSorter;
         private readonly IInputControler inputControler;
-        private readonly ICachedWord cachedWord;
-        private readonly Contracts.IUserLog userLog;
+        private readonly ICachedWordService _cashedWordService;
+        private readonly IUserLogService userLogService;
        
 
         public HomeController(ILogger<HomeController> logger, IAnagramGenerator anagramGenerator, ITxtReader txtReader,
-            IDictGenerator dictionaryGenerator, IWordSorter wordSorter, IInputControler inputControler, ICachedWord cachedWord, Contracts.IUserLog userLog)
+            IDictGenerator dictionaryGenerator, IWordSorter wordSorter, IInputControler inputControler, 
+            ICachedWordService cashedWordService, IUserLogService userLogService) 
         {
             _logger = logger;
             this.anagramGenerator = anagramGenerator;
@@ -34,8 +33,8 @@ namespace AnagramSolverWebsite.Controllers
             this.dictionaryGenerator = dictionaryGenerator;
             this.wordSorter = wordSorter;
             this.inputControler = inputControler;
-            this.cachedWord = cachedWord;
-            this.userLog = userLog;
+            _cashedWordService = cashedWordService;
+            this.userLogService = userLogService;
         }
 
         public IActionResult Index(string id)
@@ -54,24 +53,24 @@ namespace AnagramSolverWebsite.Controllers
                 {
                     id = id.ToLower();
                     var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
-                    if(cachedWord.ReturnWordIfInCasheWords(id) == "No values")
+                    if(_cashedWordService.ReturnWordIfInCasheWords(id) == "No values")
                     {
                         ViewData["Message"] = anagram;
                     }
                     else
                     {
-                        ViewData["Message"] = cachedWord.ReturnWordIfInCasheWords(id);
+                        ViewData["Message"] = _cashedWordService.ReturnWordIfInCasheWords(id);
                     }
                     
-                    cachedWord.AddCacheToServer(id, anagram);
+                    _cashedWordService.AddCacheToServer(id, anagram);
                     WriteCookie(id);
-                    var log = new UserLog();
-                    log.AddUserLogToDB(id, anagram);
+                    //var log = new UserLogService();
+                    //log.AddUserLogToDB(id, anagram);
                 }
                 else
                 {
                     ViewData["Message"] = validation;
-                    cachedWord.AddCacheToServer(id, validation);
+                    _cashedWordService.AddCacheToServer(id, validation);
                     WriteCookie(id);
                 }
                 

@@ -1,25 +1,16 @@
-﻿using Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Contracts;
 using System.Data.SqlClient;
-using System.IO;
-using Contracts;
+using System.Diagnostics;
 
-namespace BuisnessLogic
+namespace Anagram.Database
+  
 {
-    public class CachedWord : ICachedWord
+    public class CashedWordRespository : ICachedWordRepository
     {
+        private const string ConnectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
         public void AddCacheToServer(string input, string anagram)
         {
-            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
-
-
-            if (input != null)
-            {
-                using (var connection = new SqlConnection(connectionString))
+                using (var connection = new SqlConnection(ConnectionString))
                 {
                     connection.Open();
                     if (CheckForWordInCasheTable(input) == false)
@@ -34,38 +25,31 @@ namespace BuisnessLogic
 
                     connection.Close();
                 }
-
-            }
         }
 
         public bool CheckForWordInCasheTable(string input)
         {
-            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
-
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                SqlCommand cmd = new SqlCommand( $"SELECT Words FROM CashedWords WHERE Words='{input}'", connection); 
+                SqlCommand cmd = new SqlCommand($"SELECT Words FROM CashedWords WHERE Words='{input}'", connection);
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.HasRows)
                 {
-                    connection.Close(); //Do I really need this?
-                    return true;
+                    var result = true;
+                    return result;
                 }
-                connection.Close(); //Do I really need this?
-                return false;
+                connection.Close();
             }
-
+            return false;
         }
 
         public string ReturnWordIfInCasheWords(string input)
         {
 
-            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
-
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 if (CheckForWordInCasheTable(input) == true)
@@ -80,9 +64,11 @@ namespace BuisnessLogic
                     return text;
 
                 }
-                connection.Close();
+                connection.Close(); // Keisti
             }
             return "No values";
         }
     }
+
+    
 }

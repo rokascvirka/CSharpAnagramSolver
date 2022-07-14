@@ -2,7 +2,7 @@
 
 namespace Contracts
 {
-    public interface ICachedWord
+    public interface ICachedWordRepository
     {
         void AddCacheToServer(string input, string anagram);
         bool CheckForWordInCasheTable(string input);

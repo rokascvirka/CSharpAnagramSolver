@@ -1,19 +1,11 @@
 using BuisnessLogic;
 using Contracts;
 using Anagram.Database;
-using Contracts.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
-
+using Buisnesslogic;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IAnagramGenerator, AnagramGenerator>();
 builder.Services.AddTransient<ITxtReader, TxtReader>();
@@ -21,8 +13,9 @@ builder.Services.AddTransient<IDictGenerator, DictionaryGenerator>();
 builder.Services.AddTransient<IWordSorter, WordSorter>();
 builder.Services.AddTransient<IInputControler, InputControler>();
 builder.Services.AddTransient<IWordRepository, DataBaseWordRepository>();
-builder.Services.AddTransient<ICachedWord, CachedWord>();
-builder.Services.AddTransient<IUserLog, UserLog>();
+builder.Services.AddTransient<ICachedWordRepository, CashedWordRespository>();
+builder.Services.AddTransient<ICachedWordService, CashedWordService>();
+builder.Services.AddTransient<IUserLogService, UserLogService>();
 
 var app = builder.Build();
 

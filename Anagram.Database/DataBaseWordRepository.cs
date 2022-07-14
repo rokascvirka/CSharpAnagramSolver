@@ -3,25 +3,20 @@ using Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Data.Common;
-using System.Data;
+using BuisnessLogic;
 
 namespace Anagram.Database
 {
-    public class DataBaseWordRepository : IWordRepository //gali naudpt web, gali naudot console.
+    public class DataBaseWordRepository : IWordRepository//gali naudpt web, gali naudot console.
     {
+        private const string ConnectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
         public HashSet<WordModel> GetWords()
         {
             //apsirasyti, ka grazins  /kodas kuris kreipiasi i duombaze ir sudeda i modelius.
             // atsidaryt duomenu baze
-            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
 
             SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = connectionString;
+            connection.ConnectionString = ConnectionString;
             connection.Open();
             // nuskaityti zodzius is lenteles
             SqlCommand cmd = new SqlCommand();
@@ -53,10 +48,9 @@ namespace Anagram.Database
         }
         public List<UserLogModel> GetUserLogInfo()
         {
-            var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
 
             SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = connectionString;
+            connection.ConnectionString = ConnectionString;
             connection.Open();
             // nuskaityti zodzius is lenteles
             SqlCommand cmd = new SqlCommand();
@@ -84,5 +78,4 @@ namespace Anagram.Database
             return wordsList;
         }
     }
-
 }

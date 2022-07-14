@@ -61,6 +61,8 @@ namespace BuisnessLogic
             return randomValueInList;
         }
 
+
+        /// vietoj boolo galima naudot enuma
         public int ValidateAnagram(string randomValueInList, string anagramWord, string sortedMainWordForAnagram, Dictionary<string, List<string>> wordsInDictionary)
         {
 
