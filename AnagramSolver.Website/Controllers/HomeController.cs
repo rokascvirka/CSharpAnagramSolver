@@ -14,13 +14,13 @@ namespace AnagramSolverWebsite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IAnagramGenerator anagramGenerator;
-        private readonly ITxtReader txtReader;
-        private readonly IDictGenerator dictionaryGenerator;
-        private readonly IWordSorter wordSorter;
-        private readonly IInputControler inputControler;
+        private readonly IAnagramGenerator _anagramGenerator;
+        private readonly ITxtReader _txtReader;
+        private readonly IDictGenerator _dictionaryGenerator;
+        private readonly IWordSorter _wordSorter;
+        private readonly IInputControler _inputControler;
         private readonly ICachedWordService _cashedWordService;
-        private readonly IUserLogService userLogService;
+        private readonly IUserLogService _userLogService;
        
 
         public HomeController(ILogger<HomeController> logger, IAnagramGenerator anagramGenerator, ITxtReader txtReader,
@@ -28,31 +28,31 @@ namespace AnagramSolverWebsite.Controllers
             ICachedWordService cashedWordService, IUserLogService userLogService) 
         {
             _logger = logger;
-            this.anagramGenerator = anagramGenerator;
-            this.txtReader = txtReader;
-            this.dictionaryGenerator = dictionaryGenerator;
-            this.wordSorter = wordSorter;
-            this.inputControler = inputControler;
+            _anagramGenerator = anagramGenerator;
+            _txtReader = txtReader;
+            _dictionaryGenerator = dictionaryGenerator;
+            _wordSorter = wordSorter;
+            _inputControler = inputControler;
             _cashedWordService = cashedWordService;
-            this.userLogService = userLogService;
+            _userLogService = userLogService;
         }
 
         public IActionResult Index(string id)
         {
             
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
-            var txtfile = txtReader.TxtFileReader(textFilePath);
-            var words = txtReader.FirstWordReader(txtfile);
+            var txtfile = _txtReader.TxtFileReader(textFilePath);
+            var words = _txtReader.FirstWordReader(txtfile);
             
-            var wordsInDictionary = dictionaryGenerator.DictGenerator(words);
+            var wordsInDictionary = _dictionaryGenerator.DictGenerator(words);
             if (id != null)
             {
-                var validation = inputControler.InputVerifyer(id);
+                var validation = _inputControler.InputVerifyer(id);
 
                 if (validation == "valid")
                 {
                     id = id.ToLower();
-                    var anagram = anagramGenerator.AnagramGeneratorMethod(id, wordSorter, wordsInDictionary);
+                    var anagram = _anagramGenerator.AnagramGeneratorMethod(id, _wordSorter, wordsInDictionary);
                     if(_cashedWordService.ReturnWordIfInCasheWords(id) == "No values")
                     {
                         ViewData["Message"] = anagram;
@@ -103,8 +103,8 @@ namespace AnagramSolverWebsite.Controllers
         public IActionResult WordsList(string searchString, int? page)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
-            var txtfile = txtReader.TxtFileReader(textFilePath);
-            var words = txtReader.FirstWordReader(txtfile);
+            var txtfile = _txtReader.TxtFileReader(textFilePath);
+            var words = _txtReader.FirstWordReader(txtfile);
 
             var pageNumber = page ?? 1;
             int pageSize = 100;
@@ -127,13 +127,13 @@ namespace AnagramSolverWebsite.Controllers
         public IActionResult AddNewWordInFile(string AddString)
         {
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
-            var txtfile = txtReader.TxtFileReader(textFilePath);
-            var words = txtReader.FirstWordReader(txtfile);
+            var txtfile = _txtReader.TxtFileReader(textFilePath);
+            var words = _txtReader.FirstWordReader(txtfile);
 
 
             if (AddString != null)
             {
-                var validation = inputControler.InputVerifyer(AddString);
+                var validation = _inputControler.InputVerifyer(AddString);
 
                 if (validation == "valid")
                 {
@@ -146,7 +146,7 @@ namespace AnagramSolverWebsite.Controllers
                     }
                     else
                     {
-                        txtReader.AddWordToFile(textFilePath, AddString);
+                        _txtReader.AddWordToFile(textFilePath, AddString);
                         words.OrderBy(x => x.word);
                         ViewData["Message"] = AddString + " added";
                     }
