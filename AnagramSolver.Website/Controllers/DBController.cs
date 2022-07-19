@@ -4,7 +4,7 @@ using X.PagedList;
 
 namespace AnagramSolver.Website.Controllers
 {
-    [Route("cotroller/DBView/")]
+    [Route("controller/DBView/")]
     public class DBController : Controller
     {
         private readonly IWordRepository _repository;

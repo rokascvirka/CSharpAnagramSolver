@@ -22,7 +22,7 @@ namespace Anagram.Database
                 var user = new UserLogModel();
 
                 user.UserIP = IP;
-                user.SearchTime = DateTime.Now.ToString();
+                user.SearchTime = DateTime.Now;
                 user.SearchWord = input;
                 user.Anagram = anagram;
 

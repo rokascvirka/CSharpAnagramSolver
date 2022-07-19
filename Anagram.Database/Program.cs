@@ -17,7 +17,7 @@ namespace Anagram.Database
         {
             //SqlConnectionas
             var connectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
-            var txtFilePath = ("C:\\Users\\rokas.cvirka\\Documents\\zodynas3.txt");
+            var txtFilePath = ("C:\\Users\\rokas.cvirka\\Documents\\zodynas.txt");
 
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = connectionString;

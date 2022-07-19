@@ -15,8 +15,8 @@ namespace Anagram.Database
                     connection.Open();
                     if (CheckForWordInCasheTable(input) == false)
                     {
-                        SqlCommand cmd = new SqlCommand("INSERT INTO CashedWords(Words, Anagram) " + "VALUES(@words, @anagram)", connection);
-
+                        SqlCommand cmd = new SqlCommand($"INSERT INTO CashedWords(Words, Anagram) " + "VALUES(@words, @anagram)", connection);
+                        
                         cmd.Parameters.Add(new SqlParameter("@words", input));
                         cmd.Parameters.AddWithValue("@anagram", anagram);
 

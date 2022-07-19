@@ -39,7 +39,6 @@ namespace AnagramSolverWebsite.Controllers
 
         public IActionResult Index(string id)
         {
-            
             var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
             var txtfile = _txtReader.TxtFileReader(textFilePath);
             var words = _txtReader.FirstWordReader(txtfile);
@@ -64,8 +63,8 @@ namespace AnagramSolverWebsite.Controllers
                     
                     _cashedWordService.AddCacheToServer(id, anagram);
                     WriteCookie(id);
-                    //var log = new UserLogService();
-                    //log.AddUserLogToDB(id, anagram);
+                    var log = new UserLogService();
+                    log.AddUserLogToDB(id, anagram);
                 }
                 else
                 {
@@ -75,8 +74,6 @@ namespace AnagramSolverWebsite.Controllers
                 }
                 
             }
-
-            
 
             return View();
         }

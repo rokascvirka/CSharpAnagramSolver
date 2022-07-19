@@ -66,7 +66,7 @@ namespace Anagram.Database
             {
                 var userLogModel = new UserLogModel();
                 userLogModel.UserIP = reader.GetString(0);
-                userLogModel.SearchTime = reader.GetString(1);
+                userLogModel.SearchTime = reader.GetDateTime(1);
                 userLogModel.SearchWord = reader.GetString(2);
                 userLogModel.Anagram = reader.GetString(3);
 
