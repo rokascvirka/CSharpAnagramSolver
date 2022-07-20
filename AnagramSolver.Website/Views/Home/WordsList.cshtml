@@ -32,7 +32,7 @@
         {
         <tr>
             <td>
-                @Html.RouteLink(item.ToString(), new { controller = "Home", action = "Index", id = item })<br />
+                @Html.RouteLink(item.word.ToString(), new { controller = "Home", action = "Index", id = item.word })<br />
             </td>
         </tr>
     }

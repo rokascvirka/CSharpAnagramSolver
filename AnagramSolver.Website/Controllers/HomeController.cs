@@ -77,25 +77,6 @@ namespace AnagramSolverWebsite.Controllers
 
             return View();
         }
-        public void WriteCookie(string cookievalue)
-        {
-            StringBuilder words = new StringBuilder();
-            var cookies = new CookieOptions();
-            DateTime now = DateTime.Now;
-            cookies.Expires = DateTime.Now.AddDays(1);
-            words.Append($"{Request.Cookies["name"]}, {cookievalue}, {now}");
-            Response.Cookies.Append("name", words.ToString());
-        }
-
-        public IActionResult ReadCookie()
-        {
-            ViewBag.CookieValue = Request.Cookies["name"];
-            return View();
-        }
-        public IActionResult RemoveCookie()
-        {
-            return RedirectToAction("Index");
-        }
 
         public IActionResult WordsList(string searchString, int? page)
         {
@@ -155,6 +136,26 @@ namespace AnagramSolverWebsite.Controllers
             }
 
             return View();
+        }
+
+        public void WriteCookie(string cookievalue)
+        {
+            StringBuilder words = new StringBuilder();
+            var cookies = new CookieOptions();
+            DateTime now = DateTime.Now;
+            cookies.Expires = DateTime.Now.AddDays(1);
+            words.Append($"{Request.Cookies["name"]}, {cookievalue}, {now}");
+            Response.Cookies.Append("name", words.ToString());
+        }
+
+        public IActionResult ReadCookie()
+        {
+            ViewBag.CookieValue = Request.Cookies["name"];
+            return View();
+        }
+        public IActionResult RemoveCookie()
+        {
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

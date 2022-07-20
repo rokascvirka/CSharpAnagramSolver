@@ -1,0 +1,42 @@
+﻿@using AnagramSolver.Website.Models;
+@using Contracts;
+
+@model ViewAllModel
+
+@{
+    ViewData["Title"] = "ViewAllView";
+}
+
+<h1>ViewAllView</h1>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("searchText")
+        <input id="searchBox" name ="sbox" type="submit" value="Search" runat="server"  />    
+    </p>
+
+
+}
+
+<table class="table">
+
+@for (int i = 0; i < Model.WordList.Count; i++) {
+        <tr>
+            
+            <td>@Html.RouteLink(@Model.WordList[i].word, new{controller = "Home", action = "Index", id = Model.WordList[i].word})</td>
+        </tr>
+}
+    </tbody>
+
+    <div class="pagination" > 
+        @if (Model.WordList.PreviousPage)
+        {
+            @Html.ActionLink("Previous", "ViewAll", new{page = Model.WordList.PageIndex - 1, searchText = Model.Search}, new {@class = "btn btn-secondary"})
+        }
+        @if (Model.WordList.NextPage)
+        {
+            @Html.ActionLink("Next", "ViewAll", new{page = Model.WordList.PageIndex + 1, searchText = Model.Search}, new {@class = "btn btn-secondary"})
+        }
+
+    </div>
+</table>
