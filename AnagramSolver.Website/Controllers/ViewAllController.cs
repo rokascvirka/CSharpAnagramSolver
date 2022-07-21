@@ -26,7 +26,6 @@ namespace AnagramSolver.Website.Controllers
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                ViewBag.SearchText = searchText;
                 var foundwords = words.Where(w => w.word.Contains(searchText)).ToList();
 
                 var foundWordsPageOfWords = PaginatedList<Word>.ToPageList(foundwords, pageNumber, pageSize);
@@ -34,6 +33,7 @@ namespace AnagramSolver.Website.Controllers
                 ViewAllModel model = new ViewAllModel();
 
                 model.WordList = foundWordsPageOfWords;
+                model.Search = searchText;
 
                 return View(model);
             }

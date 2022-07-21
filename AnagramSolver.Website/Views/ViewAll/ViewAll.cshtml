@@ -13,11 +13,7 @@
     <p> 
         Find by name: @Html.TextBox("searchText")
         <input type="submit" value="Search"  />  
-        
-
     </p>
-
-
 }
 
 <table class="table">
@@ -33,11 +29,11 @@
     <div class="pagination" > 
         @if (Model.WordList.PreviousPage)
         {
-            @Html.ActionLink("Previous", "ViewAll", new{page = Model.WordList.PageIndex - 1, searchText = ViewBag.SearchText}, new {@class = "btn btn-secondary"})
+            @Html.ActionLink("Previous", "ViewAll", new{page = Model.WordList.PageIndex - 1, searchText = Model.Search}, new {@class = "btn btn-secondary"})
         }
         @if (Model.WordList.NextPage)
         {
-            @Html.ActionLink("Next", "ViewAll", new{page = Model.WordList.PageIndex + 1, searchText = ViewBag.SearchText}, new {@class = "btn btn-secondary"})
+            @Html.ActionLink("Next", "ViewAll", new{page = Model.WordList.PageIndex + 1, searchText = Model.Search}, new {@class = "btn btn-secondary"})
         }
         @Html.ActionLink("MainView", "ViewAll", new {controller = "controller", action = "ViewAll"}, new{ @class = "btn btn-secondary"})
 
