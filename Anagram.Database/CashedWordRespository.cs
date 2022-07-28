@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Models;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -12,13 +13,19 @@ namespace Anagram.Database
         {
                 using (var connection = new SqlConnection(ConnectionString))
                 {
+                var cashed = new CashedWordsModel();
+
+                cashed.Words = input;
+                cashed.Anagram = anagram;
+                
+
                     connection.Open();
-                    if (CheckForWordInCasheTable(input) == false)
+                    if (CheckForWordInCasheTable(cashed.Words) == false)
                     {
                         SqlCommand cmd = new SqlCommand($"INSERT INTO CashedWords(Words, Anagram) " + "VALUES(@words, @anagram)", connection);
                         
-                        cmd.Parameters.Add(new SqlParameter("@words", input));
-                        cmd.Parameters.AddWithValue("@anagram", anagram);
+                        cmd.Parameters.Add(new SqlParameter("@words", cashed.Words));
+                        cmd.Parameters.AddWithValue("@anagram", cashed.Anagram);
 
                         cmd.ExecuteNonQuery();
                     }

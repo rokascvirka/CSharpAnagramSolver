@@ -2,6 +2,10 @@ using BuisnessLogic;
 using Contracts;
 using Anagram.Database;
 using Buisnesslogic;
+using AnagramSolver.Website.Models;
+using AnagramSolver.EF.DbFirst;
+using Microsoft.EntityFrameworkCore;
+using AnagramSolver.EF.DbFirst.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +17,12 @@ builder.Services.AddTransient<IDictGenerator, DictionaryGenerator>();
 builder.Services.AddTransient<IWordSorter, WordSorter>();
 builder.Services.AddTransient<IInputControler, InputControler>();
 builder.Services.AddTransient<IWordRepository, DataBaseWordRepository>();
-builder.Services.AddTransient<ICachedWordRepository, CashedWordRespository>();
+builder.Services.AddTransient<ICachedWordRepository, CachedWordDbFirstRepository>();
 builder.Services.AddTransient<ICachedWordService, CashedWordService>();
 builder.Services.AddTransient<IUserLogService, UserLogService>();
+
+builder.Services.AddDbContext<WordsContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WordsContext") ?? throw new InvalidOperationException("Connection string 'WordsContext' not found.")));
 
 var app = builder.Build();
 

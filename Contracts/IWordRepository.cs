@@ -5,7 +5,6 @@ namespace Contracts
 {
     public interface IWordRepository
     {
-        HashSet<WordModel> GetWords();
         List<UserLogModel> GetUserLogInfo();
     }
 }

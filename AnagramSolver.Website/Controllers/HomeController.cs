@@ -4,7 +4,6 @@ using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text;
-using X.PagedList;
 
 
 
@@ -51,20 +50,26 @@ namespace AnagramSolverWebsite.Controllers
                 if (validation == "valid")
                 {
                     id = id.ToLower();
-                    var anagram = _anagramGenerator.AnagramGeneratorMethod(id, _wordSorter, wordsInDictionary);
+                    
                     if(_cashedWordService.ReturnWordIfInCasheWords(id) == "No values")
                     {
+                        var anagram = _anagramGenerator.AnagramGeneratorMethod(id, _wordSorter, wordsInDictionary);
+                        _cashedWordService.AddCacheToServer(id, anagram);
                         ViewData["Message"] = anagram;
+
+                        var log = new UserLogService();
+                        log.AddUserLogToDB(id, anagram);
                     }
                     else
                     {
-                        ViewData["Message"] = _cashedWordService.ReturnWordIfInCasheWords(id);
+                        var cachedAnagram = _cashedWordService.ReturnWordIfInCasheWords(id);
+                        ViewData["Message"] = cachedAnagram;
+                        var log = new UserLogService();
+                        log.AddUserLogToDB(id, cachedAnagram);
                     }
-                    
-                    _cashedWordService.AddCacheToServer(id, anagram);
+
                     WriteCookie(id);
-                    var log = new UserLogService();
-                    log.AddUserLogToDB(id, anagram);
+
                 }
                 else
                 {
@@ -76,30 +81,6 @@ namespace AnagramSolverWebsite.Controllers
             }
 
             return View();
-        }
-
-        public IActionResult WordsList(string searchString, int? page)
-        {
-            var textFilePath = "C:\\Users\\rokas.cvirka\\Documents\\" + "zodynas" + ".txt";
-            var txtfile = _txtReader.TxtFileReader(textFilePath);
-            var words = _txtReader.FirstWordReader(txtfile);
-
-            var pageNumber = page ?? 1;
-            int pageSize = 100;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var foundwords = words.Where(w => w.word.Contains(searchString)).ToList();
-
-                var foundWordsPageOfWords = foundwords.ToPagedList(pageNumber, pageSize);
-
-                return View(foundWordsPageOfWords);
-            }
-            else
-            {
-                var onePageOfWords = words.ToPagedList(pageNumber, pageSize);
-                return View(onePageOfWords);
-            }
         }
 
         public IActionResult AddNewWordInFile(string AddString)

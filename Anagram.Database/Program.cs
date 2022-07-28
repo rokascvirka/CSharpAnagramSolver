@@ -35,7 +35,7 @@ namespace Anagram.Database
                     string[] fields = line.Split("\t");
                     
 
-                    SqlCommand command = new SqlCommand("INSERT INTO Words(Word, Pronoun) " + "VALUES(@word, @pronoun)", connection);
+                    SqlCommand command = new SqlCommand("INSERT INTO WordsTable(Word, Pronoun) " + "VALUES(@word, @pronoun)", connection);
 
                     if (fields.Length == 1)
                     {
@@ -56,8 +56,7 @@ namespace Anagram.Database
 
             var data = new DataBaseWordRepository();
 
-            var hsetas = data.GetWords();
-
+            
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace Contracts.Models
+﻿namespace Contracts.Models
 {
     public class WordModel
     {
