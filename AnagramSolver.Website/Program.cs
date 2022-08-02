@@ -19,6 +19,7 @@ builder.Services.AddTransient<IInputControler, InputControler>();
 builder.Services.AddTransient<IWordRepository, DataBaseWordRepository>();
 builder.Services.AddTransient<ICachedWordRepository, CachedWordDbFirstRepository>();
 builder.Services.AddTransient<ICachedWordService, CashedWordService>();
+builder.Services.AddTransient<IUserLogRepository, UserLogDbFirstRepository>();
 builder.Services.AddTransient<IUserLogService, UserLogService>();
 
 builder.Services.AddDbContext<WordsContext>(options =>

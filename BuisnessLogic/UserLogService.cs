@@ -9,10 +9,11 @@ namespace BuisnessLogic
 {
     public class UserLogService : IUserLogService
     {
-        private readonly UserLogRepository _repository;
-        public UserLogService()
+        private readonly IUserLogRepository _repository;
+
+        public UserLogService(IUserLogRepository repository)
         {
-            _repository = new UserLogRepository();
+            _repository = repository;
         }
 
         public void AddUserLogToDB(string input, string anagram)

@@ -57,15 +57,14 @@ namespace AnagramSolverWebsite.Controllers
                         _cashedWordService.AddCacheToServer(id, anagram);
                         ViewData["Message"] = anagram;
 
-                        var log = new UserLogService();
-                        log.AddUserLogToDB(id, anagram);
+                        _userLogService.AddUserLogToDB(id, anagram);
                     }
                     else
                     {
                         var cachedAnagram = _cashedWordService.ReturnWordIfInCasheWords(id);
                         ViewData["Message"] = cachedAnagram;
-                        var log = new UserLogService();
-                        log.AddUserLogToDB(id, cachedAnagram);
+                        _userLogService.AddUserLogToDB(id, cachedAnagram);
+
                     }
 
                     WriteCookie(id);

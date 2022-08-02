@@ -10,7 +10,7 @@ using BuisnessLogic;
 
 namespace Anagram.Database
 {
-    public class UserLogRepository
+    public class UserLogRepository : IUserLogRepository
     {
         private const string ConnectionString = "Server=LT-LIT-SC-0684\\MSSQLSERVER01;Database=Words; Integrated Security=true;";
 
