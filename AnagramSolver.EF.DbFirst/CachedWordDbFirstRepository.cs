@@ -6,11 +6,11 @@ namespace AnagramSolver.EF.DbFirst
 {
     public class CachedWordDbFirstRepository : ICachedWordRepository
     {
-        private readonly WordsContext _context = new WordsContext();
+        private readonly WordsContext _context = new ();
         public void AddCacheToServer(string input, string anagram)
         {
             
-            var cached = new CashedWord// EF model
+            var cached = new CashedWord
             {
 
                 Words = input,
@@ -26,19 +26,12 @@ namespace AnagramSolver.EF.DbFirst
 
         public bool CheckForWordInCasheTable(string input)
         {
-
-                var items = _context.CashedWords.ToList();
-                bool result = items.Any(x => x.Words == input);
-
-                return result;
+            return _context.CashedWords.Any(x => x.Words == input);
         }
 
         public string ReturnWordIfInCasheWords(string input)
         {
-            
-            var items = _context.CashedWords.ToList();
-
-            var result = items.Where(x => x.Words == input).Select(x => x.Anagram).FirstOrDefault();
+            var result = _context.CashedWords.Where(x => x.Words == input).Select(x => x.Anagram).FirstOrDefault();
             
             if(result == null)
             {

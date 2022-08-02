@@ -16,11 +16,12 @@ builder.Services.AddTransient<ITxtReader, TxtReader>();
 builder.Services.AddTransient<IDictGenerator, DictionaryGenerator>();
 builder.Services.AddTransient<IWordSorter, WordSorter>();
 builder.Services.AddTransient<IInputControler, InputControler>();
-builder.Services.AddTransient<IWordRepository, DataBaseWordRepository>();
+builder.Services.AddTransient<IWordRepository, WordDbFirstRepository>();
 builder.Services.AddTransient<ICachedWordRepository, CachedWordDbFirstRepository>();
 builder.Services.AddTransient<ICachedWordService, CashedWordService>();
 builder.Services.AddTransient<IUserLogRepository, UserLogDbFirstRepository>();
 builder.Services.AddTransient<IUserLogService, UserLogService>();
+builder.Services.AddTransient<IDataBaseWordService, DataBaseWordService>();
 
 builder.Services.AddDbContext<WordsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WordsContext") ?? throw new InvalidOperationException("Connection string 'WordsContext' not found.")));

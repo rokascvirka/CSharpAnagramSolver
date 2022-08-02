@@ -14,7 +14,7 @@ namespace AnagramSolver.EF.DbFirst
         private readonly WordsContext _context = new WordsContext();
         public void AddUserLogToDB(string input, string anagram, string ip)
         {
-            var logsList = _context.UserLogs.ToList();
+            var logsList = _context.UserLogs.OrderBy(x => x.SearchTime).ToList();
             var userLog = new UserLog
             {
                 UserIp = ip,
